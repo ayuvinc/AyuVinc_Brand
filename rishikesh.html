@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rishikesh — March 1–3 · Vidushi &amp; Vishesh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-deep:#162B18;--green-forest:#2A5228;--green-mid:#4A7C59;--green-light:#85C08A;
+      --river:#4A8FA8;--river-light:#A8D5E2;--orange:#E07840;--gold:#F0C060;
+      --cream:#F8F5EF;--warm-white:#FFFDF8;--rose:#B5838D;--rose-light:#D4A5A5;
+      --txt:#1A2318;--txt-mid:#3D5040;--txt-light:#7A9080;
+      --border:rgba(42,82,40,0.12);--shadow:0 4px 20px rgba(0,0,0,0.07);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--txt);line-height:1.7}
+    .hero{position:relative;height:100vh;min-height:580px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .hero-svg{position:absolute;inset:0;width:100%;height:100%}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,20,12,0.15) 0%,rgba(10,20,12,0.45) 100%)}
+    .hero-content{position:relative;z-index:10;text-align:center;color:#fff;padding:2rem}
+    .hero-eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:1.2rem}
+    .hero-title{font-family:'Playfair Display',serif;font-size:clamp(3.2rem,9vw,6.5rem);font-weight:700;line-height:1.05;text-shadow:0 3px 30px rgba(0,0,0,.35);margin-bottom:.5rem}
+    .hero-sub{font-family:'Playfair Display',serif;font-size:clamp(1.1rem,3vw,1.7rem);font-style:italic;color:rgba(255,255,255,.88);margin-bottom:2rem}
+    .hero-pills{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+    .hero-pill{background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.28);padding:.45rem 1.1rem;border-radius:100px;font-size:.8rem;color:#fff}
+    .scroll-hint{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);z-index:10;color:rgba(255,255,255,.6);font-size:.75rem;animation:bob 2.2s ease-in-out infinite}
+    @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+    .nav{position:sticky;top:0;z-index:200;background:var(--green-deep);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{max-width:1120px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}
+    .nav-inner::-webkit-scrollbar{display:none}
+    .nav-inner a{color:rgba(255,255,255,.6);text-decoration:none;padding:.95rem 1.4rem;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;white-space:nowrap;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+    .nav-inner a:hover{color:#fff;border-bottom-color:var(--orange)}
+    .wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+    .sh{text-align:center;padding:4.5rem 0 2.5rem}
+    .sh-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--green-mid);background:rgba(74,124,89,.1);padding:.28rem .9rem;border-radius:100px;margin-bottom:.8rem}
+    .sh-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,4vw,2.6rem);color:var(--txt);line-height:1.2}
+    .sh-line{width:44px;height:3px;background:linear-gradient(90deg,var(--green-forest),var(--river));margin:1rem auto 0;border-radius:2px}
+    .sh.inv .sh-tag{color:var(--green-light);background:rgba(133,192,138,.12)}
+    .sh.inv .sh-title{color:#fff}
+    .sh.inv .sh-line{background:linear-gradient(90deg,var(--green-light),var(--river-light))}
+    .ov-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;padding-bottom:4rem}
+    .ov-card{background:var(--warm-white);border-radius:16px;padding:1.6rem 1.2rem;border:1px solid var(--border);text-align:center}
+    .ov-icon{font-size:1.8rem;margin-bottom:.5rem}
+    .ov-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--txt-light);margin-bottom:.35rem}
+    .ov-val{font-family:'Playfair Display',serif;font-size:1rem;color:var(--txt);font-weight:600}
+    .day-sec{padding:3.5rem 0;border-top:1px solid var(--border)}
+    .day-head{display:flex;align-items:flex-start;gap:1.2rem;margin-bottom:2.5rem}
+    .day-num{font-family:'Playfair Display',serif;font-size:6rem;font-weight:700;color:rgba(42,82,40,.07);line-height:1;min-width:72px}
+    .day-date{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green-mid);margin-bottom:.3rem}
+    .day-title{font-family:'Playfair Display',serif;font-size:1.75rem;color:var(--txt)}
+    .a-row{display:grid;grid-template-columns:110px 1fr;gap:1.5rem;margin-bottom:1.5rem;align-items:start}
+    @media(max-width:580px){.a-row{grid-template-columns:1fr;gap:.4rem}}
+    .a-time{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-light);padding-top:1.4rem}
+    .a-card{background:var(--warm-white);border-radius:14px;padding:1.3rem 1.5rem;border:1px solid var(--border);position:relative;overflow:hidden}
+    .a-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3.5px;border-radius:2px 0 0 2px}
+    .a-card.V::before{background:linear-gradient(180deg,var(--rose),var(--rose-light))}
+    .a-card.K::before{background:linear-gradient(180deg,var(--green-forest),var(--river))}
+    .a-card.T::before{background:linear-gradient(180deg,var(--orange),var(--gold))}
+    .ptag{display:inline-flex;align-items:center;gap:.3rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .65rem;border-radius:100px;margin-bottom:.7rem}
+    .ptag.V{background:rgba(181,131,141,.12);color:#8B5060}
+    .ptag.K{background:rgba(42,82,40,.1);color:var(--green-forest)}
+    .ptag.T{background:rgba(224,120,64,.12);color:#B05820}
+    .a-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--txt);margin-bottom:.45rem}
+    .a-body{font-size:.87rem;color:var(--txt-mid);line-height:1.65}
+    .a-body li{list-style:none;padding-left:1.1rem;position:relative;margin:.15rem 0}
+    .a-body li::before{content:'→';position:absolute;left:0;color:var(--green-mid);font-size:.8em;top:.1em}
+    .map-btn{display:inline-flex;align-items:center;gap:.3rem;font-size:.75rem;color:var(--river);text-decoration:none;font-weight:600;margin-top:.6rem;padding:.28rem .75rem;background:rgba(74,143,168,.09);border-radius:6px;transition:background .2s}
+    .map-btn:hover{background:rgba(74,143,168,.18)}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+    @media(max-width:680px){.split{grid-template-columns:1fr}}
+    .adv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.5rem}
+    .adv-card{background:var(--warm-white);border-radius:14px;padding:1.3rem 1.4rem;border:1px solid var(--border);position:relative;overflow:hidden}
+    .adv-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3.5px;background:linear-gradient(180deg,var(--green-forest),var(--river))}
+    .adv-badge{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--orange);background:rgba(224,120,64,.1);padding:.2rem .6rem;border-radius:100px;display:inline-block;margin-bottom:.6rem}
+    .adv-title{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.35rem}
+    .adv-body{font-size:.83rem;color:var(--txt-mid)}
+    .cafe-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem;padding-bottom:4rem}
+    .cafe-card{background:var(--warm-white);border-radius:14px;padding:1.2rem 1.4rem;border:1px solid var(--border);transition:transform .2s,box-shadow .2s}
+    .cafe-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.09)}
+    .cafe-name{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.15rem}
+    .cafe-loc{font-size:.72rem;color:var(--txt-light);margin-bottom:.5rem}
+    .cafe-vibe{font-size:.82rem;color:var(--txt-mid);margin-bottom:.5rem}
+    .cafe-order{font-size:.8rem;color:var(--green-forest);font-weight:600}
+    .food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;padding-bottom:4.5rem}
+    .food-card{background:var(--warm-white);border-radius:14px;padding:1.4rem;border:1px solid var(--border)}
+    .food-cat{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+    .food-item{font-size:.84rem;color:var(--txt-mid);padding:.25rem 0}
+    .food-item strong{color:var(--txt);font-weight:600;display:block}
+    .trail-sec{background:var(--green-deep);padding:5rem 0}
+    .trail-table{width:100%;border-collapse:collapse;margin-top:2rem}
+    .trail-table th{text-align:left;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);padding:.8rem 1rem;border-bottom:1px solid rgba(255,255,255,.08);font-weight:600}
+    .trail-table td{padding:.95rem 1rem;border-bottom:1px solid rgba(255,255,255,.05);font-size:.87rem;color:rgba(255,255,255,.78)}
+    .trail-table tr:hover td{background:rgba(255,255,255,.03)}
+    .trail-table td strong{color:#fff}
+    .tbadge{display:inline-block;font-size:.68rem;padding:.18rem .55rem;border-radius:100px;font-weight:600}
+    .tb-flat{background:rgba(74,143,168,.22);color:var(--river-light)}
+    .tb-trail{background:rgba(42,82,40,.4);color:var(--green-light)}
+    .tb-forest{background:rgba(133,192,138,.15);color:#A8D8B0}
+    .tmap{color:var(--river-light);text-decoration:none;font-size:.8rem;opacity:.75;transition:opacity .2s}
+    .tmap:hover{opacity:1}
+    .yoga-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;padding-bottom:4.5rem}
+    .yoga-card{background:var(--warm-white);border-radius:14px;padding:1.3rem 1.4rem;border:1px solid var(--border);border-top:3px solid var(--rose)}
+    .yoga-name{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.2rem}
+    .yoga-style{font-size:.75rem;color:var(--rose);font-weight:700;letter-spacing:.06em;margin-bottom:.4rem}
+    .yoga-note{font-size:.82rem;color:var(--txt-mid)}
+    .yoga-tip{background:rgba(181,131,141,.08);border:1px solid rgba(181,131,141,.2);border-radius:12px;padding:1rem 1.3rem;font-size:.85rem;color:#7A4850;margin-bottom:2rem}
+    .trans-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;padding-bottom:4.5rem}
+    @media(max-width:580px){.trans-grid{grid-template-columns:1fr}}
+    .trans-card{background:var(--warm-white);border-radius:16px;padding:2rem;border:1px solid var(--border)}
+    .trans-icon{font-size:2.4rem;margin-bottom:.9rem}
+    .trans-title{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:.9rem}
+    .trans-row{font-size:.84rem;color:var(--txt-mid);padding:.25rem 0}
+    .trans-row strong{color:var(--txt);font-weight:600}
+    .stay-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;padding-bottom:4.5rem}
+    .stay-card{background:var(--warm-white);border-radius:14px;padding:1.3rem 1.4rem;border:1px solid var(--border)}
+    .stay-name{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.2rem}
+    .stay-vibe{font-size:.75rem;color:var(--green-mid);font-weight:600;letter-spacing:.05em;margin-bottom:.4rem}
+    .stay-note{font-size:.82rem;color:var(--txt-mid)}
+    .prac-sec{background:linear-gradient(135deg,#EFF6F0,#E6F2E8);padding:5rem 0;border-top:1px solid var(--border)}
+    .prac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin-top:2.5rem}
+    .prac-card{background:#fff;border-radius:12px;padding:1.2rem;border:1px solid var(--border)}
+    .prac-icon{font-size:1.5rem;margin-bottom:.4rem}
+    .prac-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt-light);margin-bottom:.25rem}
+    .prac-val{font-size:.87rem;color:var(--txt)}
+    .prac-val a{color:var(--river);text-decoration:none;font-weight:600}
+    footer{background:var(--green-deep);color:rgba(255,255,255,.45);text-align:center;padding:2.5rem 1rem;font-size:.78rem}
+    footer span{color:rgba(255,255,255,.75)}
+  </style>
+</head>
+<body>
+<section class="hero" id="top">
+  <svg class="hero-svg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1A3550"/><stop offset="38%" stop-color="#3D6B8A"/>
+        <stop offset="68%" stop-color="#E8905A"/><stop offset="88%" stop-color="#F7C87A"/>
+        <stop offset="100%" stop-color="#FAE0A0"/>
+      </linearGradient>
+      <linearGradient id="mist1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#B8C8DA" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#C8D8E8" stop-opacity="0.5"/>
+      </linearGradient>
+      <linearGradient id="forest1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1E4020"/><stop offset="100%" stop-color="#152E18"/>
+      </linearGradient>
+      <linearGradient id="forest2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0D2010"/><stop offset="100%" stop-color="#081408"/>
+      </linearGradient>
+      <linearGradient id="river-g" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#4A8FA8" stop-opacity="0.0"/>
+        <stop offset="20%" stop-color="#6AAFCC" stop-opacity="0.85"/>
+        <stop offset="60%" stop-color="#7DBFDA" stop-opacity="0.95"/>
+        <stop offset="80%" stop-color="#6AAFCC" stop-opacity="0.85"/>
+        <stop offset="100%" stop-color="#4A8FA8" stop-opacity="0.0"/>
+      </linearGradient>
+      <filter id="blur-light"><feGaussianBlur stdDeviation="2.5"/></filter>
+      <radialGradient id="sun" cx="55%" cy="32%" r="12%">
+        <stop offset="0%" stop-color="#FFE8A0" stop-opacity="0.9"/>
+        <stop offset="40%" stop-color="#F7C060" stop-opacity="0.4"/>
+        <stop offset="100%" stop-color="#F7C060" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="1440" height="700" fill="url(#sky)"/>
+    <ellipse cx="792" cy="224" rx="180" ry="100" fill="url(#sun)" filter="url(#blur-light)"/>
+    <polygon fill="url(#mist1)" opacity="0.75" points="0,370 60,290 140,320 220,240 320,270 420,195 520,240 620,210 720,250 820,185 920,230 1020,195 1120,255 1220,210 1320,265 1440,230 1440,440 0,440"/>
+    <polygon fill="url(#forest1)" points="0,460 80,390 180,420 280,360 380,400 480,335 600,375 700,345 800,380 920,350 1040,385 1160,355 1280,390 1380,365 1440,385 1440,560 0,560"/>
+    <path fill="url(#river-g)" d="M 0,590 C 100,575 160,560 260,552 C 350,544 400,550 480,540 C 570,530 620,520 720,515 C 820,510 880,518 960,508 C 1040,498 1100,492 1200,488 C 1310,484 1380,490 1440,488 L 1440,540 C 1380,542 1310,540 1200,544 C 1100,548 1040,556 960,566 C 880,576 820,578 720,582 C 620,586 570,590 480,598 C 400,606 350,604 260,612 C 160,620 100,625 0,635 Z"/>
+    <polygon fill="url(#forest2)" points="0,560 60,530 110,545 160,520 230,538 300,512 380,528 460,505 560,520 650,498 740,514 840,492 940,510 1040,495 1140,512 1240,498 1340,515 1440,505 1440,700 0,700"/>
+    <g fill="#07160A" opacity="0.9">
+      <polygon points="55,530 48,556 62,556"/><polygon points="68,524 60,553 76,553"/>
+      <polygon points="82,530 74,556 90,556"/><polygon points="110,540 103,563 117,563"/>
+      <polygon points="190,520 182,548 198,548"/><polygon points="204,514 196,542 212,542"/>
+      <polygon points="320,512 313,538 327,538"/><polygon points="334,506 326,534 342,534"/>
+      <polygon points="500,505 493,531 507,531"/><polygon points="514,499 506,527 522,527"/>
+      <polygon points="680,495 673,521 687,521"/><polygon points="694,489 686,517 702,517"/>
+      <polygon points="860,492 853,518 867,518"/><polygon points="874,486 866,514 882,514"/>
+      <polygon points="1050,496 1043,522 1057,522"/><polygon points="1064,490 1056,518 1072,518"/>
+      <polygon points="1200,500 1193,525 1207,525"/><polygon points="1214,494 1206,520 1222,520"/>
+      <polygon points="1360,507 1353,532 1367,532"/><polygon points="1374,501 1366,527 1382,527"/>
+    </g>
+    <ellipse cx="720" cy="540" rx="600" ry="40" fill="rgba(240,230,210,0.18)" filter="url(#blur-light)"/>
+  </svg>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">✈ Gurgaon → Tapovan, Rishikesh</p>
+    <h1 class="hero-title">Rishikesh</h1>
+    <p class="hero-sub">March 1 – 3 · Vidushi &amp; Vishesh</p>
+    <div class="hero-pills">
+      <span class="hero-pill">🏔 280m altitude</span>
+      <span class="hero-pill">🌿 Tapovan base</span>
+      <span class="hero-pill">☀ 16–27°C</span>
+      <span class="hero-pill">3 days, 2 nights</span>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ &nbsp; scroll</div>
+</section>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#overview">Overview</a><a href="#day1">Day 1</a><a href="#day2">Day 2</a>
+    <a href="#day3">Day 3</a><a href="#cafes">Cafes</a><a href="#food">Food</a>
+    <a href="#trails">Trails</a><a href="#yoga">Yoga</a>
+    <a href="#transport">Getting Around</a><a href="#stay">Stay</a><a href="#practical">Notes</a>
+  </div>
+</nav>
+<section id="overview">
+  <div class="wrap">
+    <div class="sh"><span class="sh-tag">Trip Overview</span><h2 class="sh-title">The Plan at a Glance</h2><div class="sh-line"></div></div>
+    <div class="ov-grid">
+      <div class="ov-card"><div class="ov-icon">🚗</div><div class="ov-label">Getting There</div><div class="ov-val">Private Taxi from Gurgaon</div></div>
+      <div class="ov-card"><div class="ov-icon">⏱</div><div class="ov-label">Drive Time</div><div class="ov-val">~5–6 hrs · Depart 5–6 AM</div></div>
+      <div class="ov-card"><div class="ov-icon">📍</div><div class="ov-label">Base</div><div class="ov-val">Tapovan, Rishikesh</div></div>
+      <div class="ov-card"><div class="ov-icon">🌡</div><div class="ov-label">March Weather</div><div class="ov-val">16–27°C, clear skies</div></div>
+      <div class="ov-card"><div class="ov-icon">🏔</div><div class="ov-label">Altitude</div><div class="ov-val">~280m — no concerns</div></div>
+      <div class="ov-card"><div class="ov-icon">📅</div><div class="ov-label">Trip</div><div class="ov-val">March 1 → March 3</div></div>
+    </div>
+  </div>
+</section>
+<section class="day-sec" id="day1">
+  <div class="wrap">
+    <div class="day-head"><div class="day-num">1</div><div><div class="day-date">Saturday · March 1</div><div class="day-title">Arrive &amp; Unwind</div></div></div>
+    <div class="a-row"><div class="a-time">Morning · 11 AM</div>
+      <div class="a-card T"><span class="ptag T">✦ Together</span><div class="a-title">Arrive in Tapovan</div>
+        <div class="a-body"><ul>
+          <li>Taxi arrives after 5–6 hr drive from Gurgaon — depart by 5–6 AM</li>
+          <li>Check in, freshen up, decompress</li>
+          <li>Book the cab the night before — confirm early pickup to beat Delhi traffic</li>
+          <li>Carry snacks — no great stops until Haridwar</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="a-row"><div class="a-time">Afternoon</div>
+      <div class="split">
+        <div class="a-card V"><span class="ptag V">♡ Vidushi</span><div class="a-title">Shambhala Cafe — First Visit</div>
+          <div class="a-body"><ul>
+            <li>Order: banana smoothie, avocado toast or granola bowl</li>
+            <li>Sit, breathe, no agenda — this is the anchor spot</li>
+            <li>Short flat riverside walk after (15–20 min max)</li>
+          </ul></div>
+        </div>
+        <div class="a-card K"><span class="ptag K">⚡ Vishesh</span><div class="a-title">Exploratory Run · 12–15 km</div>
+          <div class="a-body"><ul>
+            <li>Tapovan → Ram Jhula → Laxman Jhula loop</li>
+            <li>Flat and scenic, scope terrain for Day 2</li>
+          </ul>
+          <a class="map-btn" href="https://maps.google.com/?q=Ram+Jhula+to+Laxman+Jhula,+Rishikesh" target="_blank">📍 Open in Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="a-row"><div class="a-time">Evening · 6 PM</div>
+      <div class="a-card T"><span class="ptag T">✦ Together</span><div class="a-title">Ganga Aarti at Parmarth Niketan</div>
+        <div class="a-body"><ul>
+          <li>Starts around 6 PM — just sit and watch, no walking needed</li>
+          <li>One of the most beautiful things Rishikesh does</li>
+        </ul>
+        <a class="map-btn" href="https://maps.google.com/?q=Parmarth+Niketan,+Rishikesh" target="_blank">📍 Directions</a>
+        </div>
+      </div>
+    </div>
+    <div class="a-row"><div class="a-time">Dinner</div>
+      <div class="a-card T"><span class="ptag T">✦ Together</span><div class="a-title">Beatles Cafe, Laxman Jhula — Rooftop</div>
+        <div class="a-body"><ul>
+          <li>Beatles-themed, panoramic Ganges views, relaxed atmosphere</li>
+          <li>Order: wood-fired pizza, pasta, fresh juice, chai</li>
+        </ul>
+        <a class="map-btn" href="https://maps.google.com/?q=Beatles+Cafe,+Laxman+Jhula,+Rishikesh" target="_blank">📍 Directions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="day-sec" id="day2">
+  <div class="wrap">
+    <div class="day-head"><div class="day-num">2</div><div><div class="day-date">Sunday · March 2</div><div class="day-title">The Full Day</div></div></div>
+    <div class="a-row"><div class="a-time">5:30 AM</div>
+      <div class="split">
+        <div class="a-card K"><span class="ptag K">⚡ Vishesh</span><div class="a-title">Long Trail Run · 25–30 km</div>
+          <div class="a-body"><ul>
+            <li>Neergadh Waterfall → Patna Waterfall Forest Loop</li>
+            <li>Elevation, forest cover, clean air — start early before trails fill up</li>
+            <li>Alt: Rajaji National Park buffer roads for flat tempo work</li>
+          </ul>
+          <a class="map-btn" href="https://maps.google.com/?q=Neer+Garh+Waterfall,+Rishikesh" target="_blank">📍 Neergadh Trailhead</a>
+          </div>
+        </div>
+        <div class="a-card V"><span class="ptag V">♡ Vidushi</span><div class="a-title">Morning Yoga + Shambhala Breakfast</div>
+          <div class="a-body"><ul>
+            <li>Drop-in yoga: Vinyasa Yoga Academy (Tapovan) or Anand Prakash Ashram</li>
+            <li>Ask for Hatha or Yin batch — 7–9 AM slot</li>
+            <li>Post-yoga: Shambhala Cafe — herbal tea, granola bowl</li>
+          </ul>
+          <a class="map-btn" href="https://maps.google.com/?q=Vinyasa+Yoga+Academy,+Tapovan,+Rishikesh" target="_blank">📍 Vinyasa Academy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="a-row"><div class="a-time">Mid-Morning</div>
+      <div class="a-card T"><span class="ptag T">✦ Together</span><div class="a-title">Beatles Ashram (Maharishi Mahesh Yogi Ashram)</div>
+        <div class="a-body"><ul>
+          <li>UNESCO-listed — stunning graffiti murals, meditation domes, forest paths</li>
+          <li>Mostly flat walking — go at your own pace, 1.5–2 hours</li>
+          <li>Entry fee: ₹150/person</li>
+          <li>Ram Jhula bridge stroll after — short, great views of the Ganges</li>
+        </ul>
+        <a class="map-btn" href="https://maps.google.com/?q=Maharishi+Mahesh+Yogi+Ashram,+Rishikesh" target="_blank">📍 Directions</a>
+        </div>
+      </div>
+    </div>
+    <div class="a-row"><div class="a-time">Afternoon</div>
+      <div class="split">
+        <div class="a-card V"><span class="ptag V">♡ Vidushi</span><div class="a-title">Shambhala Cafe — Slow Afternoon</div>
+          <div class="a-body"><ul>
+            <li>Read, journal, nap if needed — no plans required</li>
+            <li>Optional: browse crystal shops and bookstores in Tapovan</li>
+          </ul></div>
+        </div>
+        <div class="a-card K"><span class="ptag K">⚡ Vishesh</span><div class="a-title">Adventure Activity — Choose One</div>
+          <div class="a-body">See options below ↓</div>
+        </div>
+      </div>
+    </div>
+    <div class="adv-grid" style="margin-left:110px">
+      <div class="adv-card"><span class="adv-badge">★ Recommended</span>
+        <div class="adv-title">🪂 Bungee at Jumpin Heights</div>
+        <div class="adv-body">India's highest bungee — 83m. 20 min from Tapovan at Mohan Chatti. Book in advance.<br/>
+        <a class="map-btn" href="https://maps.google.com/?q=Jumpin+Heights,+Rishikesh" target="_blank" style="margin-top:.5rem">📍 Directions</a></div>
+      </div>
+      <div class="adv-card">
+        <div class="adv-title">🌊 Cliff Jumping at Shivpuri</div>
+        <div class="adv-body">Natural rock formations, Ganges pool below. Multiple jump heights. ~30 min from Tapovan.<br/>
+        <a class="map-btn" href="https://maps.google.com/?q=Shivpuri,+Rishikesh" target="_blank" style="margin-top:.5rem">📍 Directions</a></div>
+      </div>
+      <div class="adv-card">
+        <div class="adv-title">🦅 Zip Lining (Flying Fox)</div>
+        <div class="adv-body">Aerial zip line over the Ganges. Multiple operators near Laxman Jhula.</div>
+      </div>
+    </div>
+    <div class="a-row"><div class="a-time">Evening</div>
+      <div class="a-card T"><span class="ptag T">✦ Together</span><div class="a-title">Sunset at Triveni Ghat</div>
+        <div class="a-body"><ul><li>Sit by the river as the light turns gold — completely flat, no effort required</li></ul>
+        <a class="map-btn" href="https://maps.google.com/?q=Triveni+Ghat,+Rishikesh" target="_blank">📍 Directions</a>
+        </div>
+      </div>
+    </div>
+    <div class="a-row"><div class="a-time">Dinner</div>
+      <div class="a-card T"><span class="ptag T">✦ Together</span><div class="a-title">Little Buddha Cafe — Rooftop, Ram Jhula</div>
+        <div class="a-body"><ul>
+          <li>Backpacker favourite, rooftop with Ganges views, relaxed vibe</li>
+          <li>Order: Garhwali thali, steamed momos, chai, banana pancakes</li>
+        </ul>
+        <a class="map-btn" href="https://maps.google.com/?q=Little+Buddha+Cafe,+Ram+Jhula,+Rishikesh" target="_blank">📍 Directions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="day-sec" id="day3">
+  <div class="wrap">
+    <div class="day-head"><div class="day-num">3</div><div><div class="day-date">Monday · March 3</div><div class="day-title">Last Morning &amp; Home</div></div></div>
+    <div class="a-row"><div class="a-time">Early AM</div>
+      <div class="split">
+        <div class="a-card K"><span class="ptag K">⚡ Vishesh</span><div class="a-title">Sunrise River Run · 10–15 km</div>
+          <div class="a-body"><ul>
+            <li>Tapovan riverside loop — the best run of the trip</li>
+            <li>Golden light on the Ganges at sunrise</li>
+          </ul>
+          <a class="map-btn" href="https://maps.google.com/?q=Tapovan,+Rishikesh" target="_blank">📍 Start Point</a>
+          </div>
+        </div>
+        <div class="a-card V"><span class="ptag V">♡ Vidushi</span><div class="a-title">Last Breakfast at Shambhala</div>
+          <div class="a-body"><ul>
+            <li>Take it slow — this is the last Shambhala morning</li>
+            <li>Walk to the riverside after, sit, take it all in</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+    <div class="a-row"><div class="a-time">11 AM</div>
+      <div class="a-card T"><span class="ptag T">✦ Together</span><div class="a-title">Check Out &amp; Head Home</div>
+        <div class="a-body"><ul>
+          <li>Check out by 11 AM</li>
+          <li>Pick up local buys: rudraksha, herbal teas, local spices from Laxman Jhula market</li>
+          <li>Taxi departs Tapovan ~11:30 AM–12 PM</li>
+          <li>Arrive Gurgaon by 5–6 PM</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="cafes">
+  <div class="wrap">
+    <div class="sh"><span class="sh-tag">Where to Sit</span><h2 class="sh-title">Cafes &amp; Hangouts</h2><div class="sh-line"></div></div>
+    <div class="cafe-grid">
+      <div class="cafe-card" style="border-top:3px solid var(--rose)">
+        <div class="cafe-name">Shambhala Cafe ★</div><div class="cafe-loc">📍 Tapovan</div>
+        <div class="cafe-vibe">Quiet garden seating, yoga crowd, the anchor spot for Vidushi</div>
+        <div class="cafe-order">Avocado toast, banana smoothie, herbal teas</div>
+      </div>
+      <div class="cafe-card">
+        <div class="cafe-name">Beatles Cafe</div><div class="cafe-loc">📍 Laxman Jhula — Rooftop</div>
+        <div class="cafe-vibe">Beatles-themed, panoramic Ganges views, great for dinner</div>
+        <div class="cafe-order">Wood-fired pizza, pasta, fresh juice</div>
+      </div>
+      <div class="cafe-card">
+        <div class="cafe-name">Little Buddha Cafe</div><div class="cafe-loc">📍 Ram Jhula — Rooftop</div>
+        <div class="cafe-vibe">Laid-back, backpacker favourite, stellar views of the Ganges</div>
+        <div class="cafe-order">Thali, steamed momos, banana pancakes, chai</div>
+      </div>
+      <div class="cafe-card">
+        <div class="cafe-name">Devraj Coffee Corner</div><div class="cafe-loc">📍 Near Laxman Jhula bridge</div>
+        <div class="cafe-vibe">Old-school, no-frills, an iconic Rishikesh institution</div>
+        <div class="cafe-order">Filter coffee, aloo puri, masala omelette toast</div>
+      </div>
+      <div class="cafe-card">
+        <div class="cafe-name">Pyramid Cafe</div><div class="cafe-loc">📍 Tapovan</div>
+        <div class="cafe-vibe">Cosy, healthy menu, great for a slow breakfast</div>
+        <div class="cafe-order">Granola bowl, smoothie bowls, hummus platter</div>
+      </div>
+      <div class="cafe-card">
+        <div class="cafe-name">Cafe de Goa</div><div class="cafe-loc">📍 Tapovan</div>
+        <div class="cafe-vibe">Goa-meets-hills vibe, relaxed outdoor seating</div>
+        <div class="cafe-order">Pasta, momos, fresh lime soda</div>
+      </div>
+      <div class="cafe-card">
+        <div class="cafe-name">Bistro Nirvana</div><div class="cafe-loc">📍 Tapovan</div>
+        <div class="cafe-vibe">Clean, simple, reliable — good morning spot</div>
+        <div class="cafe-order">Eggs any style, pancakes, fresh juices</div>
+      </div>
+      <div class="cafe-card">
+        <div class="cafe-name">The 60s Cafe</div><div class="cafe-loc">📍 Laxman Jhula</div>
+        <div class="cafe-vibe">Beatles-era decor, chill afternoon spot</div>
+        <div class="cafe-order">Club sandwich, chocolate shake, maggi</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="food">
+  <div class="wrap">
+    <div class="sh" style="padding-top:1rem"><span class="sh-tag">What to Eat</span><h2 class="sh-title">The Food Guide</h2><div class="sh-line"></div></div>
+    <div class="food-grid">
+      <div class="food-card"><div class="food-cat">🌅 Breakfast</div>
+        <div class="food-item"><strong>Banana Pancakes</strong>A Rishikesh cafe staple, every cafe has them</div>
+        <div class="food-item"><strong>Aloo Puri</strong>Classic North Indian breakfast, best at local dhabas</div>
+        <div class="food-item"><strong>Granola + Yoghurt Bowl</strong>Shambhala Cafe or Pyramid</div>
+        <div class="food-item"><strong>Masala Omelette + Toast</strong>Devraj Coffee Corner — get the filter coffee</div>
+      </div>
+      <div class="food-card"><div class="food-cat">🍽 Lunch &amp; Dinner</div>
+        <div class="food-item"><strong>Garhwali Thali</strong>Kafuli, chainsoo, mandua roti — local Uttarakhand food</div>
+        <div class="food-item"><strong>Rajma Chawal</strong>Heartwarming, everywhere, always good</div>
+        <div class="food-item"><strong>Tibetan Momos</strong>Steamed (not fried) — all over Laxman Jhula</div>
+        <div class="food-item"><strong>Wood-Fired Pizza</strong>Beatles Cafe — surprisingly excellent</div>
+      </div>
+      <div class="food-card"><div class="food-cat">🌿 Local Specials</div>
+        <div class="food-item"><strong>Kafuli</strong>Garhwali spinach curry — rich and earthy</div>
+        <div class="food-item"><strong>Chainsoo</strong>Black gram dal — staple of the hills</div>
+        <div class="food-item"><strong>Roasted Corn</strong>Riverside vendors, evening snack ritual</div>
+        <div class="food-item"><strong>Maggi</strong>Mandatory on any hill trip — extra cheese version</div>
+      </div>
+      <div class="food-card"><div class="food-cat">🥤 Drinks</div>
+        <div class="food-item"><strong>Buransh (Rhododendron) Juice</strong>Local Garhwali drink — floral and light</div>
+        <div class="food-item"><strong>Ginger Lemon Honey Tea</strong>Every cafe has it, every sip is perfect</div>
+        <div class="food-item"><strong>Thick Lassi</strong>Sweet or salty, fresh and cold</div>
+        <div class="food-item"><strong>Fresh Watermelon Juice</strong>March is warm enough — get it cold</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="trail-sec" id="trails">
+  <div class="wrap">
+    <div class="sh inv"><span class="sh-tag">For Vishesh</span><h2 class="sh-title">Running Trails</h2><div class="sh-line"></div></div>
+    <table class="trail-table">
+      <thead><tr><th>Trail</th><th>Distance</th><th>Type</th><th>Map</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tapovan → Ram Jhula → Laxman Jhula Loop</strong></td><td>~12–15 km</td><td><span class="tbadge tb-flat">Flat · Riverside</span></td><td><a class="tmap" href="https://maps.google.com/?q=Ram+Jhula,+Rishikesh" target="_blank">Open Map ↗</a></td></tr>
+        <tr><td><strong>Neergadh Waterfall Trail</strong></td><td>~10–12 km one way</td><td><span class="tbadge tb-trail">Forest · Elevation</span></td><td><a class="tmap" href="https://maps.google.com/?q=Neer+Garh+Waterfall,+Rishikesh" target="_blank">Open Map ↗</a></td></tr>
+        <tr><td><strong>Patna Waterfall Forest Loop</strong></td><td>~25–30 km</td><td><span class="tbadge tb-forest">Trail · Forest · Climb</span></td><td><a class="tmap" href="https://maps.google.com/?q=Patna+Waterfall,+Rishikesh" target="_blank">Open Map ↗</a></td></tr>
+        <tr><td><strong>Rajaji Buffer Road Run</strong></td><td>20–30 km adjustable</td><td><span class="tbadge tb-flat">Flat · Jungle Roads</span></td><td><a class="tmap" href="https://maps.google.com/?q=Rajaji+National+Park+Rishikesh" target="_blank">Open Map ↗</a></td></tr>
+        <tr><td><strong>Tapovan Sunrise Riverside</strong></td><td>10–15 km</td><td><span class="tbadge tb-flat">Flat · Scenic</span></td><td><a class="tmap" href="https://maps.google.com/?q=Tapovan,+Rishikesh" target="_blank">Open Map ↗</a></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.8rem;color:rgba(255,255,255,.4);margin-top:1.2rem">Start all runs before 7 AM in March — trails get busier and warmer fast.</p>
+  </div>
+</section>
+<section id="yoga">
+  <div class="wrap">
+    <div class="sh"><span class="sh-tag">For Vidushi</span><h2 class="sh-title">Yoga Studios</h2><div class="sh-line"></div></div>
+    <div class="yoga-tip">💡 Go for <strong>Hatha or Yin yoga</strong> (gentle, restorative). Avoid fast-paced Ashtanga or hot yoga. Morning sessions (7–9 AM) are the sweet spot.</div>
+    <div class="yoga-grid">
+      <div class="yoga-card"><div class="yoga-name">Parmarth Niketan</div><div class="yoga-style">Hatha · Guided Meditation</div>
+        <div class="yoga-note">Most well-known ashram — drop-in morning classes, right on the Ganges. Also hosts the Ganga Aarti.</div>
+        <a class="map-btn" href="https://maps.google.com/?q=Parmarth+Niketan,+Rishikesh" target="_blank" style="margin-top:.6rem">📍 Directions</a>
+      </div>
+      <div class="yoga-card"><div class="yoga-name">Vinyasa Yoga Academy</div><div class="yoga-style">Vinyasa · Yin Yoga</div>
+        <div class="yoga-note">Walking distance from Tapovan — easiest drop-in option. Great Yin batch available.</div>
+        <a class="map-btn" href="https://maps.google.com/?q=Vinyasa+Yoga+Academy,+Tapovan,+Rishikesh" target="_blank" style="margin-top:.6rem">📍 Directions</a>
+      </div>
+      <div class="yoga-card"><div class="yoga-name">Anand Prakash Ashram</div><div class="yoga-style">Hatha · Ashtanga</div>
+        <div class="yoga-note">Very popular with international visitors. Request the gentle Hatha morning batch specifically.</div>
+      </div>
+      <div class="yoga-card"><div class="yoga-name">Sivananda Ashram</div><div class="yoga-style">Classical Sivananda</div>
+        <div class="yoga-note">Traditional, quiet, highly authentic. Great for a one-off immersive session.</div>
+      </div>
+      <div class="yoga-card"><div class="yoga-name">Omkarananda Ganga Sadan</div><div class="yoga-style">Gentle Yoga · Pranayama</div>
+        <div class="yoga-note">Breathing-focused, easy pace — ideal for a truly restorative session.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="transport" style="border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sh"><span class="sh-tag">Logistics</span><h2 class="sh-title">Getting Around</h2><div class="sh-line"></div></div>
+    <div class="trans-grid">
+      <div class="trans-card"><div class="trans-icon">🛺</div><div class="trans-title">Auto-Rickshaw</div>
+        <div class="trans-row">Best for short hops between Tapovan, Ram Jhula, Laxman Jhula</div>
+        <div class="trans-row"><strong>Shared auto:</strong> ₹20–40 per person</div>
+        <div class="trans-row"><strong>Private:</strong> ₹150–300</div>
+        <div class="trans-row" style="margin-top:.6rem;font-style:italic;color:var(--txt-light)">Autos can't cross pedestrian bridges — drop off and walk over</div>
+      </div>
+      <div class="trans-card"><div class="trans-icon">🛵</div><div class="trans-title">Scooty Rental</div>
+        <div class="trans-row">Most flexible — rent for the day and go at your own pace</div>
+        <div class="trans-row"><strong>Where:</strong> Main Tapovan road or near Laxman Jhula</div>
+        <div class="trans-row"><strong>Cost:</strong> ₹400–600/day</div>
+        <div class="trans-row" style="margin-top:.6rem;font-style:italic;color:var(--txt-light)">Carry your DL — usually not checked but good to have</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="stay" style="border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sh"><span class="sh-tag">Where to Stay</span><h2 class="sh-title">Stay Options in Tapovan</h2><div class="sh-line"></div></div>
+    <div class="stay-grid">
+      <div class="stay-card"><div class="stay-name">Atali Ganga</div><div class="stay-vibe">Mid-range · Riverside · Peaceful</div>
+        <div class="stay-note">Excellent for a calm, comfortable base — great for Vidushi to relax between activities.</div>
+      </div>
+      <div class="stay-card"><div class="stay-name">Divine Resort</div><div class="stay-vibe">Comfortable · Good Value</div>
+        <div class="stay-note">Walking distance to cafes and the main Tapovan strip. Solid choice.</div>
+      </div>
+      <div class="stay-card"><div class="stay-name">Natures Blessing Resort</div><div class="stay-vibe">Budget-friendly · Spacious</div>
+        <div class="stay-note">Good space for the price — solid option if keeping it simple.</div>
+      </div>
+      <div class="stay-card"><div class="stay-name">Zostel Rishikesh</div><div class="stay-vibe">Social · Great Vibe</div>
+        <div class="stay-note">Best for Vishesh's energy — social common areas, good for meeting other travellers.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="prac-sec" id="practical">
+  <div class="wrap">
+    <div class="sh" style="padding-top:0"><span class="sh-tag">Before You Go</span><h2 class="sh-title">Practical Notes</h2><div class="sh-line"></div></div>
+    <div class="prac-grid">
+      <div class="prac-card"><div class="prac-icon">🌡</div><div class="prac-label">Weather</div><div class="prac-val">16–27°C, clear skies in March — perfect</div></div>
+      <div class="prac-card"><div class="prac-icon">🏔</div><div class="prac-label">Altitude</div><div class="prac-val">~280m — zero concerns</div></div>
+      <div class="prac-card"><div class="prac-icon">🏥</div><div class="prac-label">Hospital</div><div class="prac-val"><a href="https://maps.google.com/?q=AIIMS+Rishikesh" target="_blank">AIIMS Rishikesh</a> — 15 min from Tapovan</div></div>
+      <div class="prac-card"><div class="prac-icon">💵</div><div class="prac-label">Cash</div><div class="prac-val">Carry ₹2,000–3,000 — autos, trail entry fees, local stalls</div></div>
+      <div class="prac-card"><div class="prac-icon">🌉</div><div class="prac-label">Bridges</div><div class="prac-val">No vehicles on Ram Jhula or Laxman Jhula — park and walk</div></div>
+      <div class="prac-card"><div class="prac-icon">📶</div><div class="prac-label">Signal</div><div class="prac-val">Good in Tapovan + main town; patchy on forest trails</div></div>
+      <div class="prac-card"><div class="prac-icon">👟</div><div class="prac-label">Vidushi's Packing</div><div class="prac-val">Light layers, comfortable flats or sneakers — no hiking gear needed</div></div>
+      <div class="prac-card"><div class="prac-icon">🎽</div><div class="prac-label">Vishesh's Packing</div><div class="prac-val">Trail shoes, hydration vest, running gear — 3 days worth</div></div>
+      <div class="prac-card"><div class="prac-icon">🧿</div><div class="prac-label">Things to Buy</div><div class="prac-val">Rudraksha, herbal teas, local spices — Laxman Jhula market</div></div>
+    </div>
+  </div>
+</section>
+<footer>
+  <p><span>Rishikesh · March 1–3</span> &nbsp;·&nbsp; Made with love for <span>Vidushi &amp; Vishesh</span></p>
+  <p style="margin-top:.5rem;font-size:.72rem">Have a beautiful trip 🏔</p>
+</footer>
+</body>
+</html>

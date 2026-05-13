@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AyuVinc · LinkedIn Logo Export</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Sans:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:      #090d18;
+    --navy-mid:  #0f1626;
+    --off-white: #f5f4f0;
+    --warm-gray: #9b9691;
+    --teal:      oklch(62% 0.10 195);
+    --rule:      rgba(155,150,145,0.16);
+    --rule-hi:   rgba(155,150,145,0.28);
+  }
+  html, body { background: var(--navy); color: var(--off-white); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; min-height: 100vh; }
+  .doc { max-width: 1240px; margin: 0 auto; padding: 64px 56px 100px; }
+  .doc-header { border-bottom: 1px solid var(--rule-hi); padding-bottom: 40px; margin-bottom: 56px; }
+  .eyebrow { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+  .doc-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; line-height: 1.1; }
+  .doc-title em { font-style: italic; color: rgba(245,244,240,0.4); }
+  .doc-sub { margin-top: 10px; font-size: 11px; color: rgba(245,244,240,0.35); font-style: italic; letter-spacing: 0.02em; }
+  .section { margin-bottom: 64px; }
+  .section-label { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  .card { border: 1px solid var(--rule); padding: 36px; background: rgba(245,244,240,0.02); margin-bottom: 2px; }
+  .card-row { display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: center; }
+  .preview-wrap { display: flex; align-items: center; justify-content: center; background: repeating-conic-gradient(rgba(245,244,240,0.03) 0% 25%, transparent 0% 50%) 50% / 24px 24px; border: 1px solid var(--rule); padding: 24px; min-height: 220px; }
+  .preview-wrap.light { background: var(--off-white); }
+  .preview-wrap svg { max-width: 100%; height: auto; display: block; }
+  .meta-stack { display: flex; flex-direction: column; gap: 14px; }
+  .meta-label { font-size: 8px; letter-spacing: 0.20em; text-transform: uppercase; color: var(--teal); }
+  .meta-name { font-family: 'Space Grotesk', sans-serif; font-weight: 300; font-size: 22px; letter-spacing: 0.04em; color: var(--off-white); line-height: 1.15; }
+  .meta-dim { font-size: 10px; color: rgba(245,244,240,0.40); letter-spacing: 0.06em; }
+  .meta-desc { font-size: 11px; color: rgba(245,244,240,0.50); line-height: 1.6; }
+  .btn-row { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+  .btn { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--off-white); background: transparent; border: 1px solid var(--rule-hi); padding: 12px 16px; cursor: pointer; transition: border-color 0.2s, background 0.2s; text-align: left; }
+  .btn:hover { border-color: var(--teal); background: rgba(100,175,195,0.06); }
+  .btn .scale { color: var(--teal); margin-right: 8px; }
+  .instructions { background: rgba(245,244,240,0.02); border: 1px solid var(--rule); padding: 32px 36px; }
+  .instructions h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 300; font-size: 18px; letter-spacing: 0.02em; margin-bottom: 18px; color: var(--off-white); }
+  .instructions ol { list-style: none; counter-reset: step; }
+  .instructions ol li { counter-increment: step; padding: 10px 0 10px 36px; position: relative; font-size: 12px; color: rgba(245,244,240,0.6); line-height: 1.65; border-bottom: 1px solid var(--rule); }
+  .instructions ol li:last-child { border-bottom: none; }
+  .instructions ol li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: 12px; font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.16em; color: var(--teal); }
+  .instructions code { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--off-white); background: rgba(245,244,240,0.06); padding: 2px 6px; border-radius: 2px; }
+  .format-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-top: 20px; }
+  .format-cell { border: 1px solid var(--rule); padding: 20px 22px; background: rgba(245,244,240,0.02); }
+  .fmt-name { font-family: 'Space Grotesk', sans-serif; font-weight: 300; font-size: 18px; color: var(--off-white); margin-bottom: 6px; }
+  .fmt-tag { font-size: 8px; letter-spacing: 0.20em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+  .fmt-tag.muted { color: rgba(245,244,240,0.30); }
+  .fmt-note { font-size: 11px; color: rgba(245,244,240,0.50); line-height: 1.6; }
+  .doc-footer { border-top: 1px solid var(--rule); padding-top: 36px; margin-top: 60px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: var(--warm-gray); }
+  .footer-tag { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--rule); padding: 6px 14px; }
+  @media (max-width: 900px) {
+    .card-row { grid-template-columns: 1fr; }
+    .format-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="doc-header">
+    <div class="eyebrow">AyuVinc · Master Brand · LinkedIn Export</div>
+    <div class="doc-title">LinkedIn<br><em>Logo Export</em></div>
+    <div class="doc-sub">Wordmark only · Direction A · primary register · ready for LinkedIn upload</div>
+  </div>
+
+  <!-- 01 — FORMAT GUIDANCE -->
+  <div class="section">
+    <div class="section-label">01 — Recommended Upload Format</div>
+    <div class="format-grid">
+      <div class="format-cell">
+        <div class="fmt-tag">Use this</div>
+        <div class="fmt-name">PNG</div>
+        <div class="fmt-note">LinkedIn's best-quality logo format. Supports transparency. Lossless. Use the buttons below to export each SVG to a 1× PNG.</div>
+      </div>
+      <div class="format-cell">
+        <div class="fmt-tag muted">Acceptable</div>
+        <div class="fmt-name">JPG</div>
+        <div class="fmt-note">Smaller files but lossy; no transparency. Use only if PNG isn't accepted.</div>
+      </div>
+      <div class="format-cell">
+        <div class="fmt-tag muted">Not accepted</div>
+        <div class="fmt-name">SVG</div>
+        <div class="fmt-note">LinkedIn does not accept SVG uploads. The SVGs in this folder are the vector masters — convert to PNG before uploading.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 — SQUARE PROFILE / COMPANY LOGO -->
+  <div class="section">
+    <div class="section-label">02 — Profile / Company Logo · 400 × 400</div>
+
+    <div class="card">
+      <div class="card-row">
+        <div class="preview-wrap" id="prev-square-dark">
+          <!-- SVG injected by script -->
+        </div>
+        <div class="meta-stack">
+          <div>
+            <div class="meta-label">Direction A · Dark · Primary</div>
+            <div class="meta-name">ayuvinc-linkedin-profile-dark</div>
+            <div class="meta-dim">400 × 400 · navy ground</div>
+          </div>
+          <div class="meta-desc">Default LinkedIn profile / company logo. Use against LinkedIn's white UI for maximum contrast.</div>
+          <div class="btn-row">
+            <button class="btn" data-export="ayuvinc-linkedin-profile-dark.svg" data-width="400"><span class="scale">1×</span>Download PNG · 400 × 400</button>
+            <button class="btn" data-export="ayuvinc-linkedin-profile-dark.svg" data-width="800"><span class="scale">2×</span>Download PNG · 800 × 800 (retina)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-row">
+        <div class="preview-wrap light" id="prev-square-light">
+          <!-- SVG injected by script -->
+        </div>
+        <div class="meta-stack">
+          <div>
+            <div class="meta-label">Direction A · Light · Monochrome</div>
+            <div class="meta-name">ayuvinc-linkedin-profile-light</div>
+            <div class="meta-dim">400 × 400 · off-white ground</div>
+          </div>
+          <div class="meta-desc">Use when a dark mark on a light field is needed (e.g. light-themed LinkedIn collateral).</div>
+          <div class="btn-row">
+            <button class="btn" data-export="ayuvinc-linkedin-profile-light.svg" data-width="400"><span class="scale">1×</span>Download PNG · 400 × 400</button>
+            <button class="btn" data-export="ayuvinc-linkedin-profile-light.svg" data-width="800"><span class="scale">2×</span>Download PNG · 800 × 800 (retina)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 — COVER BANNER -->
+  <div class="section">
+    <div class="section-label">03 — Profile Cover Banner · 1128 × 191</div>
+
+    <div class="card">
+      <div class="card-row">
+        <div class="preview-wrap" id="prev-banner-dark">
+          <!-- SVG injected by script -->
+        </div>
+        <div class="meta-stack">
+          <div>
+            <div class="meta-label">Cover · Dark</div>
+            <div class="meta-name">ayuvinc-linkedin-banner-dark</div>
+            <div class="meta-dim">1128 × 191 · LinkedIn personal cover</div>
+          </div>
+          <div class="meta-desc">Wordmark sits left of the profile-photo overlap zone, with a structural rule beneath. Direction A register.</div>
+          <div class="btn-row">
+            <button class="btn" data-export="ayuvinc-linkedin-banner-dark.svg" data-width="1128"><span class="scale">1×</span>Download PNG · 1128 × 191</button>
+            <button class="btn" data-export="ayuvinc-linkedin-banner-dark.svg" data-width="2256"><span class="scale">2×</span>Download PNG · 2256 × 382 (retina)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 — WORDMARK MASTER -->
+  <div class="section">
+    <div class="section-label">04 — Wordmark Master · Transparent</div>
+
+    <div class="card">
+      <div class="card-row">
+        <div class="preview-wrap" id="prev-wordmark">
+          <!-- SVG injected by script -->
+        </div>
+        <div class="meta-stack">
+          <div>
+            <div class="meta-label">Master · Transparent</div>
+            <div class="meta-name">ayuvinc-wordmark</div>
+            <div class="meta-dim">800 × 200 viewBox · scalable</div>
+          </div>
+          <div class="meta-desc">The brand-true wordmark on transparent ground. Use as the source for any future export — print, web, signage.</div>
+          <div class="btn-row">
+            <button class="btn" data-export="ayuvinc-wordmark.svg" data-width="1600"><span class="scale">2×</span>Download PNG · 1600 × 400 (transparent)</button>
+            <button class="btn" data-export="ayuvinc-wordmark.svg" data-width="3200"><span class="scale">4×</span>Download PNG · 3200 × 800 (transparent)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 — INSTRUCTIONS -->
+  <div class="section">
+    <div class="section-label">05 — How to Upload</div>
+    <div class="instructions">
+      <h3>Steps for LinkedIn</h3>
+      <ol>
+        <li>Open this page in <strong>Chrome, Edge, Safari or Firefox</strong>. Wait a moment for Space Grotesk and DM Sans to load (the wordmark uses Space Grotesk 300).</li>
+        <li>Click any <code>Download PNG</code> button above. A PNG renders client-side from the SVG and downloads to your device — no server upload, no quality loss.</li>
+        <li>For your <strong>company / profile picture</strong> on LinkedIn, upload <code>ayuvinc-linkedin-profile-dark.png</code> (400 × 400 or 800 × 800).</li>
+        <li>For your <strong>profile cover banner</strong>, upload <code>ayuvinc-linkedin-banner-dark.png</code> (1128 × 191 or 2256 × 382).</li>
+        <li>If LinkedIn rejects PNG for any reason, re-export as JPG via your OS preview tool. PNG with the navy ground is preferred — JPG works as a fallback only.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <span>AyuVinc · Master Brand Wordmark · LinkedIn Export · v1 · May 2026</span>
+    <span class="footer-tag">Master Brand</span>
+  </div>
+
+</div>
+
+<script>
+  // Inline-render each SVG into its preview slot, and wire export buttons.
+  const slots = [
+    { id: 'prev-square-dark',  file: 'ayuvinc-linkedin-profile-dark.svg'  },
+    { id: 'prev-square-light', file: 'ayuvinc-linkedin-profile-light.svg' },
+    { id: 'prev-banner-dark',  file: 'ayuvinc-linkedin-banner-dark.svg'   },
+    { id: 'prev-wordmark',     file: 'ayuvinc-wordmark.svg'               },
+  ];
+
+  // Fetch each SVG and inline it so fonts apply consistently
+  Promise.all(slots.map(s =>
+    fetch(s.file).then(r => r.text()).then(t => ({ ...s, text: t }))
+  )).then(loaded => {
+    loaded.forEach(s => {
+      const host = document.getElementById(s.id);
+      if (host) host.innerHTML = s.text;
+    });
+  }).catch(err => console.warn('SVG inline failed', err));
+
+  // PNG export: rasterize SVG via canvas at the requested width
+  document.querySelectorAll('button[data-export]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const file = btn.getAttribute('data-export');
+      const outW = parseInt(btn.getAttribute('data-width'), 10);
+
+      btn.disabled = true;
+      const original = btn.innerHTML;
+      btn.innerHTML = '<span class="scale">…</span>Preparing PNG';
+
+      try {
+        const res = await fetch(file);
+        const svgText = await res.text();
+
+        // Parse viewBox to compute height at requested width
+        const vbMatch = svgText.match(/viewBox\s*=\s*"([^"]+)"/);
+        if (!vbMatch) throw new Error('viewBox missing');
+        const [, , vbW, vbH] = vbMatch[1].split(/\s+/).map(Number);
+        const outH = Math.round(outW * (vbH / vbW));
+
+        // Ensure fonts are loaded before rasterizing
+        if (document.fonts && document.fonts.ready) await document.fonts.ready;
+
+        const blob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+        const url  = URL.createObjectURL(blob);
+
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        await new Promise((resolve, reject) => {
+          img.onload  = resolve;
+          img.onerror = reject;
+          img.src = url;
+        });
+
+        const canvas = document.createElement('canvas');
+        canvas.width = outW;
+        canvas.height = outH;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, outW, outH);
+        URL.revokeObjectURL(url);
+
+        canvas.toBlob(pngBlob => {
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(pngBlob);
+          a.download = file.replace(/\.svg$/, '') + '-' + outW + '.png';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        }, 'image/png');
+      } catch (e) {
+        console.error(e);
+        alert('Export failed — open the SVG directly and use the browser\'s "Save Image As..." instead.');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = original;
+      }
+    });
+  });
+</script>
+</body>
+</html>

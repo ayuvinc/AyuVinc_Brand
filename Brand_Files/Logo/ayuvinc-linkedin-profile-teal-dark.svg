@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AyuVinc · LinkedIn Profile / Company Logo · Teal on Dark
+  400 x 400 · Space Grotesk 700 · teal fill
+  Off-spec variant per explicit request.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 400 400"
+     width="400" height="400"
+     role="img" aria-label="AyuVinc — Healthcare Infrastructure">
+  <defs>
+    <style type="text/css"><![CDATA[
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=DM+Sans:wght@400;700&display=swap');
+      .bg   { fill: #090d18; }
+      .wm   { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 50px; letter-spacing: 2.00px;
+              fill: #1f9aa3; fill: oklch(62% 0.10 195); }
+      .desc { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 2.34px;
+              fill: #1f9aa3; fill: oklch(62% 0.10 195); fill-opacity: 0.55; }
+    ]]></style>
+  </defs>
+  <rect class="bg" width="400" height="400"/>
+  <text class="wm"   x="44" y="208">AyuVinc</text>
+  <text class="desc" x="46" y="234">HEALTHCARE INFRASTRUCTURE</text>
+</svg>

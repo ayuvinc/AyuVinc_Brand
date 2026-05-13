@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AyuVinc · Wordmark · Teal · Bold variant
+  Transparent ground · scalable
+  Space Grotesk 700 · letter-spacing 0.04em · fill oklch(62% 0.10 195)
+  Off-spec variant: brand book reserves teal for accents and forbids weight above 400.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 800 200"
+     width="800" height="200"
+     role="img" aria-label="AyuVinc">
+  <defs>
+    <style type="text/css"><![CDATA[
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=DM+Sans:wght@400;700&display=swap');
+      .wm   { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 96px; letter-spacing: 3.84px;
+              fill: #1f9aa3; fill: oklch(62% 0.10 195); }
+      .desc { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 3.38px;
+              fill: #1f9aa3; fill: oklch(62% 0.10 195); fill-opacity: 0.55; }
+    ]]></style>
+  </defs>
+  <text class="wm"   x="0" y="110">AyuVinc</text>
+  <text class="desc" x="2" y="150">HEALTHCARE INFRASTRUCTURE</text>
+</svg>

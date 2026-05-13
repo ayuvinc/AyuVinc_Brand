@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AyuVinc · Brand Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Sans:wght@300;400&family=Noto+Sans+Devanagari:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:      #090d18; --navy-mid: #0f1626; --navy-2: #141c2e;
+    --off-white: #f5f4f0; --warm-gray: #9b9691;
+    --teal:      oklch(62% 0.10 195); --teal-dark: oklch(45% 0.10 195);
+    --sage:      oklch(65% 0.07 155);
+    --rule:      rgba(155,150,145,0.16); --rule-hi: rgba(155,150,145,0.28);
+  }
+  html, body { background: var(--navy); color: var(--off-white); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; min-height: 100vh; }
+  .doc { max-width: 1200px; margin: 0 auto; padding: 64px 56px 120px; }
+  .sg { font-family: 'Space Grotesk', sans-serif; }
+  .dm { font-family: 'DM Sans', sans-serif; }
+  .deva { font-family: 'Noto Sans Devanagari', sans-serif; }
+  .cg { font-family: 'Cormorant Garamond', serif; }
+
+  /* Header */
+  .doc-header { display:grid; grid-template-columns:1fr auto; align-items:end; border-bottom:1px solid var(--rule-hi); padding-bottom:44px; margin-bottom:72px; gap:40px; }
+  .eyebrow { font-size:9px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal); margin-bottom:12px; }
+  .doc-title { font-family:'Cormorant Garamond',serif; font-size:40px; font-weight:300; line-height:1.1; }
+  .doc-title em { font-style:italic; color:rgba(245,244,240,0.4); }
+  .doc-meta { text-align:right; font-size:10px; color:var(--warm-gray); letter-spacing:0.06em; line-height:2.1; }
+
+  /* Section */
+  .section { margin-bottom:80px; }
+  .section-label { font-size:9px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal); margin-bottom:28px; display:flex; align-items:center; gap:14px; }
+  .section-label::after { content:''; flex:1; height:1px; background:var(--rule); }
+
+  /* Swatches */
+  .swatch-row { display:grid; grid-template-columns:repeat(6,1fr); gap:2px; margin-bottom:16px; }
+  .swatch { padding:20px 16px 14px; display:flex; flex-direction:column; justify-content:flex-end; min-height:96px; border:1px solid transparent; }
+  .sw-name { font-size:9px; font-weight:400; letter-spacing:0.06em; margin-bottom:3px; }
+  .sw-val  { font-size:8px; opacity:0.55; letter-spacing:0.04em; font-family:'DM Sans',sans-serif; }
+  .sw-use  { font-size:8px; opacity:0.4; letter-spacing:0.04em; margin-top:2px; }
+
+  /* Type scale */
+  .type-scale { display:grid; gap:2px; }
+  .ts-row { display:grid; grid-template-columns:90px 1fr 200px; border:1px solid var(--rule); background:rgba(245,244,240,0.02); align-items:center; }
+  .ts-size { padding:12px 14px; font-size:9px; letter-spacing:0.12em; color:rgba(155,150,145,0.5); border-right:1px solid var(--rule); text-align:right; font-family:'DM Sans',sans-serif; }
+  .ts-sample { padding:12px 24px; line-height:1.1; }
+  .ts-spec { padding:12px 16px; font-size:10px; color:rgba(245,244,240,0.3); border-left:1px solid var(--rule); line-height:1.5; font-family:'DM Sans',sans-serif; }
+
+  /* Lockup spacing diagram */
+  .spacing-diagram { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-bottom:24px; }
+  .sd-demo { background:var(--navy-mid); border:1px solid var(--rule); padding:44px 48px; position:relative; }
+  .sd-spec { background:rgba(245,244,240,0.02); border:1px solid var(--rule); padding:28px 32px; }
+
+  /* Spacing annotations */
+  .annot { display:flex; align-items:center; gap:8px; margin:3px 0; }
+  .annot-line { flex:1; height:1px; background:rgba(100,175,195,0.25); position:relative; }
+  .annot-line::before, .annot-line::after { content:''; position:absolute; top:-2px; width:1px; height:5px; background:rgba(100,175,195,0.4); }
+  .annot-line::before { left:0; }
+  .annot-line::after { right:0; }
+  .annot-val { font-size:8px; color:var(--teal); letter-spacing:0.1em; white-space:nowrap; font-family:'DM Sans',sans-serif; }
+
+  /* Spec table */
+  .spec-table { display:grid; gap:2px; }
+  .st-row { display:grid; grid-template-columns:160px 1fr; gap:2px; }
+  .st-lbl { background:rgba(245,244,240,0.02); border:1px solid var(--rule); padding:11px 14px; font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--teal); display:flex; align-items:center; }
+  .st-val { background:rgba(245,244,240,0.02); border:1px solid var(--rule); padding:11px 16px; font-size:11px; color:rgba(245,244,240,0.5); line-height:1.6; display:flex; align-items:center; }
+
+  /* Module system overview */
+  .module-trio { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-bottom:24px; }
+  .module-card { background:var(--navy-mid); border:1px solid var(--rule); padding:36px 32px; display:flex; flex-direction:column; align-items:flex-start; }
+
+  /* Code block */
+  .code-block { background:var(--navy-2); border:1px solid var(--rule); padding:28px 32px; font-family:monospace; font-size:11px; color:rgba(245,244,240,0.55); line-height:1.8; overflow-x:auto; margin-bottom:2px; }
+  .code-comment { color:rgba(100,175,195,0.5); }
+  .code-prop { color:rgba(245,244,240,0.75); }
+  .code-val { color:var(--sage); }
+
+  /* Governance rules */
+  .gov-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; margin-bottom:24px; }
+  .gov-card { background:rgba(245,244,240,0.02); border:1px solid var(--rule); padding:24px 28px; }
+  .gov-label { font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); margin-bottom:12px; }
+  .gov-body  { font-size:11px; color:rgba(245,244,240,0.45); line-height:1.75; }
+
+  /* Footer */
+  .doc-footer { border-top:1px solid var(--rule); padding-top:36px; margin-top:60px; display:flex; justify-content:space-between; align-items:center; font-size:10px; color:var(--warm-gray); }
+  .footer-tag { font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:var(--teal); border:1px solid var(--rule); padding:6px 14px; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div>
+      <div class="eyebrow">AyuVinc · Phase 5 · Brand Reference</div>
+      <div class="doc-title">Brand Reference<br><em>Color · Type · Spacing · Governance</em></div>
+    </div>
+    <div class="doc-meta">
+      Phase 5 of 6<br>
+      tokens.css available separately<br>
+      Version 1 · May 2026
+    </div>
+  </div>
+
+  <!-- 01: COLOR ── -->
+  <div class="section">
+    <div class="section-label">01 — Color System</div>
+    <div class="swatch-row">
+      <div class="swatch" style="background:#090d18; border-color:var(--rule);">
+        <div class="sw-name">Navy</div>
+        <div class="sw-val">#090d18</div>
+        <div class="sw-use">Primary background</div>
+      </div>
+      <div class="swatch" style="background:#0f1626; border-color:var(--rule);">
+        <div class="sw-name">Navy Mid</div>
+        <div class="sw-val">#0f1626</div>
+        <div class="sw-use">Raised surface</div>
+      </div>
+      <div class="swatch" style="background:#141c2e; border-color:var(--rule);">
+        <div class="sw-name">Navy 2</div>
+        <div class="sw-val">#141c2e</div>
+        <div class="sw-use">Elevated surface</div>
+      </div>
+      <div class="swatch" style="background:#f5f4f0; border-color:rgba(9,13,24,0.15);">
+        <div class="sw-name" style="color:#090d18;">Off-White</div>
+        <div class="sw-val" style="color:#090d18;">#f5f4f0</div>
+        <div class="sw-use" style="color:#090d18;">Text · Light BG</div>
+      </div>
+      <div class="swatch" style="background:oklch(62% 0.10 195); border-color:transparent;">
+        <div class="sw-name">Teal</div>
+        <div class="sw-val">oklch(62% .10 195)</div>
+        <div class="sw-use">Accent · Layer nums</div>
+      </div>
+      <div class="swatch" style="background:oklch(65% 0.07 155); border-color:transparent;">
+        <div class="sw-name">Sage</div>
+        <div class="sw-val">oklch(65% .07 155)</div>
+        <div class="sw-use">Secondary accent</div>
+      </div>
+    </div>
+
+    <!-- Opacity scale -->
+    <div style="background:var(--navy-mid); border:1px solid var(--rule); padding:24px 28px; margin-bottom:16px;">
+      <div style="font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(155,150,145,0.4); margin-bottom:16px;">Off-white opacity scale — used for text hierarchy on dark backgrounds</div>
+      <div style="display:flex; gap:2px;">
+        <div style="flex:1; padding:12px 10px; text-align:center; background:rgba(245,244,240,1.00);"><div style="font-size:8px; color:#090d18; font-family:'DM Sans',sans-serif;">100%</div></div>
+        <div style="flex:1; padding:12px 10px; text-align:center; background:rgba(245,244,240,0.80);"><div style="font-size:8px; color:#090d18; font-family:'DM Sans',sans-serif;">80%</div></div>
+        <div style="flex:1; padding:12px 10px; text-align:center; background:rgba(245,244,240,0.60);"><div style="font-size:8px; color:#090d18; font-family:'DM Sans',sans-serif;">60%</div></div>
+        <div style="flex:1; padding:12px 10px; text-align:center; background:rgba(245,244,240,0.40);"><div style="font-size:8px; color:#090d18; font-family:'DM Sans',sans-serif;">40%</div></div>
+        <div style="flex:1; padding:12px 10px; text-align:center; background:rgba(245,244,240,0.30);"><div style="font-size:8px; color:#090d18; font-family:'DM Sans',sans-serif;">30%</div></div>
+        <div style="flex:1; padding:12px 10px; text-align:center; background:rgba(245,244,240,0.18);"><div style="font-size:8px; color:#090d18; font-family:'DM Sans',sans-serif;">18%</div></div>
+      </div>
+      <div style="display:flex; gap:2px; margin-top:4px;">
+        <div style="flex:1; font-size:8px; color:rgba(245,244,240,0.4); text-align:center; font-family:'DM Sans',sans-serif; padding:0 4px;">Primary text</div>
+        <div style="flex:1; font-size:8px; color:rgba(245,244,240,0.4); text-align:center; font-family:'DM Sans',sans-serif; padding:0 4px;">Secondary</div>
+        <div style="flex:1; font-size:8px; color:rgba(245,244,240,0.4); text-align:center; font-family:'DM Sans',sans-serif; padding:0 4px;">Muted</div>
+        <div style="flex:1; font-size:8px; color:rgba(245,244,240,0.4); text-align:center; font-family:'DM Sans',sans-serif; padding:0 4px;">Subdued</div>
+        <div style="flex:1; font-size:8px; color:rgba(245,244,240,0.4); text-align:center; font-family:'DM Sans',sans-serif; padding:0 4px;">Descriptors</div>
+        <div style="flex:1; font-size:8px; color:rgba(245,244,240,0.4); text-align:center; font-family:'DM Sans',sans-serif; padding:0 4px;">Parent attribution</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02: TYPOGRAPHY ── -->
+  <div class="section">
+    <div class="section-label">02 — Typography System</div>
+
+    <!-- Font families -->
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-bottom:24px;">
+      <div style="background:rgba(245,244,240,0.02); border:1px solid rgba(100,175,195,0.3); padding:24px 24px;">
+        <div style="font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); margin-bottom:14px;">Identity · Primary</div>
+        <div class="sg" style="font-size:32px; font-weight:300; color:var(--off-white); line-height:1; margin-bottom:10px;">Aa</div>
+        <div style="font-size:10px; color:rgba(245,244,240,0.4); line-height:1.6; font-family:'DM Sans',sans-serif;">Space Grotesk<br>Weights: 300 · 400 · 500<br>Use: wordmarks, display, module names</div>
+      </div>
+      <div style="background:rgba(245,244,240,0.02); border:1px solid var(--rule); padding:24px 24px;">
+        <div style="font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(155,150,145,0.5); margin-bottom:14px;">UI · Labels</div>
+        <div class="dm" style="font-size:32px; font-weight:300; color:rgba(245,244,240,0.75); line-height:1; margin-bottom:10px;">Aa</div>
+        <div style="font-size:10px; color:rgba(245,244,240,0.4); line-height:1.6; font-family:'DM Sans',sans-serif;">DM Sans<br>Weights: 300 · 400<br>Use: UI, labels, descriptors, body</div>
+      </div>
+      <div style="background:rgba(245,244,240,0.02); border:1px solid var(--rule); padding:24px 24px;">
+        <div style="font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(155,150,145,0.5); margin-bottom:14px;">Devanagari</div>
+        <div class="deva" style="font-size:32px; font-weight:300; color:rgba(245,244,240,0.75); line-height:1.2; margin-bottom:10px;">अ</div>
+        <div style="font-size:10px; color:rgba(245,244,240,0.4); line-height:1.6; font-family:'DM Sans',sans-serif;">Noto Sans Devanagari<br>Weights: 200 · 300 · 400<br>Use: module bilingual lockups</div>
+      </div>
+      <div style="background:rgba(245,244,240,0.02); border:1px solid var(--rule); padding:24px 24px; opacity:0.5;">
+        <div style="font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(155,150,145,0.4); margin-bottom:14px;">Editorial only</div>
+        <div class="cg" style="font-size:32px; font-weight:300; font-style:italic; color:rgba(245,244,240,0.6); line-height:1; margin-bottom:10px;">Aa</div>
+        <div style="font-size:10px; color:rgba(245,244,240,0.35); line-height:1.6; font-family:'DM Sans',sans-serif;">Cormorant Garamond<br>Weight: 300 italic<br>Vision canvas only — not in identity</div>
+      </div>
+    </div>
+
+    <!-- Type scale -->
+    <div class="type-scale">
+      <div class="ts-row">
+        <div class="ts-size">72px</div>
+        <div class="ts-sample"><span class="sg" style="font-size:72px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">AyuVinc</span></div>
+        <div class="ts-spec">Space Grotesk 300<br>Hero wordmark</div>
+      </div>
+      <div class="ts-row" style="background:rgba(100,175,195,0.03);">
+        <div class="ts-size" style="color:var(--teal);">56px ★</div>
+        <div class="ts-sample"><span class="sg" style="font-size:56px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Dhara</span></div>
+        <div class="ts-spec">Space Grotesk 300<br>Module primary display</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-size">36px</div>
+        <div class="ts-sample"><span class="sg" style="font-size:36px; font-weight:300; letter-spacing:0.18em; text-transform:uppercase; color:var(--off-white); line-height:1;">AYUVINC</span></div>
+        <div class="ts-spec">Space Grotesk 300 · 0.18em<br>Uppercase institutional</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-size">28px</div>
+        <div class="ts-sample"><span class="sg" style="font-size:28px; font-weight:300; letter-spacing:0.04em; color:rgba(245,244,240,0.8); line-height:1;">Healthcare Infrastructure Intelligence</span></div>
+        <div class="ts-spec">Space Grotesk 300<br>Subheadings</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-size">14px</div>
+        <div class="ts-sample"><span class="dm" style="font-size:14px; font-weight:300; color:rgba(245,244,240,0.6); line-height:1.6;">Clinical records flow continuously across providers, preserving the complete memory of care.</span></div>
+        <div class="ts-spec">DM Sans 300<br>Body text</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-size">9px</div>
+        <div class="ts-sample"><span class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal);">Module · Infrastructure · Clinical Layer</span></div>
+        <div class="ts-spec">DM Sans 400 · 0.22em<br>Labels · eyebrows</div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-size">54px Deva</div>
+        <div class="ts-sample"><span class="deva" style="font-size:54px; font-weight:300; color:var(--off-white); line-height:1.22;">धारा</span></div>
+        <div class="ts-spec">Noto Sans Devanagari 300<br>−4% vs EN optical calibration</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03: LOCKUP SPACING ── -->
+  <div class="section">
+    <div class="section-label">03 — Lockup Spacing Reference</div>
+    <div class="spacing-diagram">
+
+      <!-- Annotated demo -->
+      <div class="sd-demo">
+        <div style="font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(155,150,145,0.35); margin-bottom:28px;">Annotated full lockup</div>
+        <div style="display:flex; align-items:flex-start; gap:24px;">
+
+          <!-- The lockup -->
+          <div style="display:flex; flex-direction:column; align-items:flex-start;">
+            <div class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); line-height:1;">01</div>
+            <!-- 6px gap -->
+            <div style="height:6px;"></div>
+            <div class="sg" style="font-size:44px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Dhara</div>
+            <div class="deva" style="font-size:42px; font-weight:300; color:var(--off-white); line-height:1.22;">धारा</div>
+            <!-- 20px gap -->
+            <div style="height:20px;"></div>
+            <div style="height:1px; background:rgba(245,244,240,0.12); width:160px;"></div>
+            <!-- 12px gap -->
+            <div style="height:12px;"></div>
+            <div class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.24em; text-transform:uppercase; color:rgba(245,244,240,0.3); line-height:1.65;">Continuous Health Records<br><span style="color:rgba(245,244,240,0.18);">AyuVinc</span></div>
+          </div>
+
+          <!-- Annotations -->
+          <div style="display:flex; flex-direction:column; padding-top:0; gap:0; min-width:120px;">
+            <div style="height:9px; display:flex; align-items:center;">
+              <div style="font-size:8px; color:rgba(100,175,195,0.6); white-space:nowrap; font-family:'DM Sans',sans-serif;">Layer num · 9px</div>
+            </div>
+            <div style="height:6px; display:flex; align-items:center;">
+              <div style="width:100%; display:flex; align-items:center; gap:4px;">
+                <div style="flex:1; height:1px; background:rgba(100,175,195,0.25);"></div>
+                <div style="font-size:7px; color:var(--teal); white-space:nowrap; font-family:'DM Sans',sans-serif;">6px</div>
+              </div>
+            </div>
+            <div style="height:44px; display:flex; align-items:center;">
+              <div style="font-size:8px; color:rgba(100,175,195,0.6); white-space:nowrap; font-family:'DM Sans',sans-serif;">English · 44px SG300</div>
+            </div>
+            <div style="height:54px; display:flex; align-items:center;">
+              <div style="font-size:8px; color:rgba(100,175,195,0.6); white-space:nowrap; font-family:'DM Sans',sans-serif;">Deva · 42px ND300</div>
+            </div>
+            <div style="height:20px; display:flex; align-items:center;">
+              <div style="width:100%; display:flex; align-items:center; gap:4px;">
+                <div style="flex:1; height:1px; background:rgba(100,175,195,0.25);"></div>
+                <div style="font-size:7px; color:var(--teal); white-space:nowrap; font-family:'DM Sans',sans-serif;">20px</div>
+              </div>
+            </div>
+            <div style="height:1px; background:rgba(100,175,195,0.3); margin:0 0;"></div>
+            <div style="height:12px; display:flex; align-items:center;">
+              <div style="width:100%; display:flex; align-items:center; gap:4px;">
+                <div style="flex:1; height:1px; background:rgba(100,175,195,0.25);"></div>
+                <div style="font-size:7px; color:var(--teal); white-space:nowrap; font-family:'DM Sans',sans-serif;">12px</div>
+              </div>
+            </div>
+            <div style="height:28px; display:flex; align-items:center;">
+              <div style="font-size:8px; color:rgba(100,175,195,0.6); white-space:nowrap; font-family:'DM Sans',sans-serif;">Descriptor · 8px DM400</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spec table -->
+      <div class="sd-spec">
+        <div style="font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(155,150,145,0.4); margin-bottom:16px;">Lockup specifications</div>
+        <div class="spec-table">
+          <div class="st-row"><div class="st-lbl">Layer num</div><div class="st-val">9px · DM Sans 400 · 0.20em · uppercase · teal · mb 6px</div></div>
+          <div class="st-row"><div class="st-lbl">EN name</div><div class="st-val">Space Grotesk 300 · display scale · 0.04em · CamelCase</div></div>
+          <div class="st-row"><div class="st-lbl">Devanagari</div><div class="st-val">Noto Sans Deva 300 · EN size × 0.96 · natural tracking</div></div>
+          <div class="st-row"><div class="st-lbl">Gap EN→Deva</div><div class="st-val">Natural leading of Devanagari (line-height 1.22)</div></div>
+          <div class="st-row"><div class="st-lbl">Deva→Rule</div><div class="st-val">20px margin-bottom on Devanagari element</div></div>
+          <div class="st-row"><div class="st-lbl">Rule</div><div class="st-val">1px · #f5f4f0 · 12% opacity · full lockup width</div></div>
+          <div class="st-row"><div class="st-lbl">Rule→Desc</div><div class="st-val">12px margin-bottom on rule element</div></div>
+          <div class="st-row"><div class="st-lbl">Descriptor</div><div class="st-val">8px · DM Sans 400 · 0.24em · uppercase · 30% opacity</div></div>
+          <div class="st-row"><div class="st-lbl">Parent</div><div class="st-val">"AyuVinc" · same size · 18% opacity · new line</div></div>
+          <div class="st-row"><div class="st-lbl">Alignment</div><div class="st-val">Always left. Never centered.</div></div>
+          <div class="st-row"><div class="st-lbl">Deva minimum</div><div class="st-val">16px screen · 12pt print · English only below this</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04: MODULE OVERVIEW ── -->
+  <div class="section">
+    <div class="section-label">04 — Module System · Quick Reference</div>
+    <div class="module-trio">
+
+      <div class="module-card">
+        <div class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); margin-bottom:8px;">01</div>
+        <div class="sg" style="font-size:40px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Dhara</div>
+        <div class="deva" style="font-size:38px; font-weight:300; color:var(--off-white); line-height:1.22; margin-bottom:16px;">धारा</div>
+        <div style="height:1px; background:rgba(245,244,240,0.12); width:100%; margin-bottom:10px;"></div>
+        <div class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase; color:rgba(245,244,240,0.3); line-height:1.65;">Continuous Health Records<br><span style="color:rgba(245,244,240,0.18);">AyuVinc</span></div>
+      </div>
+
+      <div class="module-card">
+        <div class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); margin-bottom:8px;">02</div>
+        <div class="sg" style="font-size:40px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Vaani</div>
+        <div class="deva" style="font-size:38px; font-weight:300; color:var(--off-white); line-height:1.22; margin-bottom:16px;">वाणी</div>
+        <div style="height:1px; background:rgba(245,244,240,0.12); width:100%; margin-bottom:10px;"></div>
+        <div class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase; color:rgba(245,244,240,0.3); line-height:1.65;">Clinical Scribe<br><span style="color:rgba(245,244,240,0.18);">AyuVinc</span></div>
+      </div>
+
+      <div class="module-card">
+        <div class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); margin-bottom:8px;">03</div>
+        <div class="sg" style="font-size:40px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Setu</div>
+        <div class="deva" style="font-size:38px; font-weight:300; color:var(--off-white); line-height:1.22; margin-bottom:16px;">सेतु</div>
+        <div style="height:1px; background:rgba(245,244,240,0.12); width:100%; margin-bottom:10px;"></div>
+        <div class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase; color:rgba(245,244,240,0.3); line-height:1.65;">Transplant Coordination<br><span style="color:rgba(245,244,240,0.18);">AyuVinc</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 05: FONT LOADING CODE ── -->
+  <div class="section">
+    <div class="section-label">05 — Font Loading · Implementation</div>
+    <div class="code-block">
+<span class="code-comment">&lt;!-- AyuVinc font stack — add to &lt;head&gt; --&gt;</span>
+&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link href="<span class="code-val">https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500
+  &amp;family=DM+Sans:wght@300;400
+  &amp;family=Noto+Sans+Devanagari:wght@200;300;400
+  &amp;family=Cormorant+Garamond:ital,wght@0,300;1,300
+  &amp;display=swap</span>" rel="stylesheet"&gt;
+
+<span class="code-comment">/* CSS custom property usage */</span>
+<span class="code-prop">font-family</span>: <span class="code-val">var(--font-identity)</span>;    <span class="code-comment">/* Space Grotesk — wordmarks, module names */</span>
+<span class="code-prop">font-family</span>: <span class="code-val">var(--font-ui)</span>;          <span class="code-comment">/* DM Sans — UI, labels, body */</span>
+<span class="code-prop">font-family</span>: <span class="code-val">var(--font-devanagari)</span>;  <span class="code-comment">/* Noto Sans Devanagari — bilingual lockups */</span>
+    </div>
+  </div>
+
+  <!-- 06: GOVERNANCE ── -->
+  <div class="section">
+    <div class="section-label">06 — Brand Governance</div>
+    <div class="gov-grid">
+      <div class="gov-card">
+        <div class="gov-label">AyuVinc master brand</div>
+        <div class="gov-body">Text only. Space Grotesk 300. CamelCase primary, uppercase for institutional contexts. English only — never with Devanagari. No symbol, mark, or icon in any context.</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-label">Module identity</div>
+        <div class="gov-body">All three modules (Dhara, Vaani, Setu) use identical typographic treatment. Layer number (01, 02, 03) is the only differentiator beyond the name. No color variation. No symbol variation.</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-label">Devanagari script</div>
+        <div class="gov-body">Always co-equal with English. Never a subtitle, caption, or translation. Minimum 16px on screen, 12pt in print. Optical size set to 96% of the paired English size. Noto Sans Devanagari weight 300 only.</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-label">Color usage</div>
+        <div class="gov-body">Teal (oklch 62% 0.10 195) for layer numbers and structural accents only. No per-module color differentiation. No gradient fills. No colored backgrounds for identity elements.</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-label">Alignment</div>
+        <div class="gov-body">All lockups are left-aligned. Never centered. Infrastructure reads as specification documents — structured, not designed. Centering introduces design register; left alignment asserts system.</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-label">Typography weight</div>
+        <div class="gov-body">Space Grotesk 300 for all display and identity use. Shifts to 400 below 24px for legibility. Never bolder than 400 in identity contexts. DM Sans 400 for all labels and descriptors.</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-label">What this system is not</div>
+        <div class="gov-body">Not startup branding. Not a product identity. Not an app icon system. Not a wellness or Ayurveda brand. Not multi-colored. Not symbolic. The identity communicates through restraint and system logic alone.</div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-label">Files in this system</div>
+        <div class="gov-body">AyuVinc Logo.html · Dhara Logo.html · Vaani Logo.html · Setu Logo.html · tokens.css · brand-reference.html · Phase 1–3 exploration docs · composition-plan.html</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>AyuVinc Vision · Brand Reference · Phase 5 · Version 1 · May 2026</span>
+    <span class="footer-tag">Phase 5 Complete</span>
+  </div>
+
+</div>
+</body>
+</html>

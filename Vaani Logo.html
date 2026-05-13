@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaani · वाणी · AyuVinc Module Logo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Sans:wght@300;400&family=Noto+Sans+Devanagari:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:      #090d18;
+    --navy-mid:  #0f1626;
+    --off-white: #f5f4f0;
+    --warm-gray: #9b9691;
+    --teal:      oklch(62% 0.10 195);
+    --teal-dark: oklch(45% 0.10 195);
+    --sage:      oklch(65% 0.07 155);
+    --rule:      rgba(155,150,145,0.16);
+    --rule-hi:   rgba(155,150,145,0.28);
+  }
+  html, body { background: var(--navy); color: var(--off-white); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; min-height: 100vh; }
+  .doc { max-width: 1100px; margin: 0 auto; padding: 64px 56px 100px; }
+  .doc-header { display: grid; grid-template-columns: 1fr auto; align-items: end; border-bottom: 1px solid var(--rule-hi); padding-bottom: 40px; margin-bottom: 72px; gap: 40px; }
+  .eyebrow { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+  .doc-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; line-height: 1.1; display:flex; align-items:baseline; gap:16px; }
+  .doc-title-deva { font-family: 'Noto Sans Devanagari', sans-serif; font-weight: 300; font-size: 30px; color: rgba(245,244,240,0.4); }
+  .doc-meta { text-align: right; font-size: 10px; color: var(--warm-gray); letter-spacing: 0.06em; line-height: 2.1; }
+  .section { margin-bottom: 72px; }
+  .section-label { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 2px; }
+  .stage { border: 1px solid var(--rule); padding: 56px 52px; position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 340px; }
+  .stage.dark  { background: var(--navy); }
+  .stage.dark2 { background: var(--navy-mid); }
+  .stage.light { background: var(--off-white); border-color: rgba(9,13,24,0.1); }
+  .stage-label { position: absolute; top: 16px; left: 20px; font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(155,150,145,0.4); }
+  .stage.light .stage-label { color: rgba(9,13,24,0.28); }
+  .compact { min-height: 180px; padding: 36px 44px; }
+  .sg   { font-family: 'Space Grotesk', sans-serif; }
+  .dm   { font-family: 'DM Sans', sans-serif; }
+  .deva { font-family: 'Noto Sans Devanagari', sans-serif; }
+  .lk-num { font-size: 9px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; font-family: 'DM Sans', sans-serif; }
+  .lk-en  { font-family: 'Space Grotesk', sans-serif; font-size: 56px; font-weight: 300; letter-spacing: 0.04em; color: var(--off-white); line-height: 1; }
+  .lk-dv  { font-family: 'Noto Sans Devanagari', sans-serif; font-size: 54px; font-weight: 300; color: var(--off-white); line-height: 1.22; margin-bottom: 20px; }
+  .lk-rule { height: 1px; background: rgba(245,244,240,0.12); width: 100%; margin-bottom: 12px; }
+  .lk-desc { font-family: 'DM Sans', sans-serif; font-size: 8px; font-weight: 400; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(245,244,240,0.3); line-height: 1.65; }
+  .lk-parent { color: rgba(245,244,240,0.18); }
+  .lk-en-lg  { font-size: 44px; }
+  .lk-dv-lg  { font-size: 42px; }
+  .lk-en-sm  { font-size: 28px; }
+  .lk-dv-sm  { font-size: 26px; margin-bottom: 14px; }
+  /* Light versions */
+  .light .lk-num  { color: var(--teal-dark); }
+  .light .lk-en   { color: #090d18; }
+  .light .lk-dv   { color: #090d18; }
+  .light .lk-rule { background: rgba(9,13,24,0.12); }
+  .light .lk-desc { color: rgba(9,13,24,0.3); }
+  .light .lk-parent { color: rgba(9,13,24,0.18); }
+  /* Size register */
+  .size-table { display: grid; gap: 2px; margin-bottom: 24px; }
+  .size-row { display: grid; grid-template-columns: 72px 1fr 140px; border: 1px solid var(--rule); background: rgba(245,244,240,0.02); align-items: center; }
+  .sz-label { padding: 12px 14px; font-size: 9px; letter-spacing: 0.12em; color: rgba(155,150,145,0.4); border-right: 1px solid var(--rule); text-align: right; }
+  .sz-sample { padding: 12px 24px; line-height: 1; }
+  .sz-note { padding: 12px 16px; font-size: 10px; color: rgba(245,244,240,0.3); border-left: 1px solid var(--rule); }
+  /* Spec rows */
+  .spec-list { display: grid; gap: 2px; }
+  .spec-row { display: grid; grid-template-columns: 130px 1fr; gap: 2px; }
+  .sp-lbl { background: rgba(245,244,240,0.02); border: 1px solid var(--rule); padding: 12px 14px; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); display: flex; align-items: center; }
+  .sp-val { background: rgba(245,244,240,0.02); border: 1px solid var(--rule); padding: 12px 16px; font-size: 11px; color: rgba(245,244,240,0.5); line-height: 1.6; display: flex; align-items: center; }
+  /* Inline format */
+  .inline-row { display: flex; align-items: baseline; gap: 0; }
+  .inline-sep { color: rgba(245,244,240,0.2); font-size: 18px; font-family: 'DM Sans', sans-serif; margin: 0 10px; }
+  /* Footer */
+  .doc-footer { border-top: 1px solid var(--rule); padding-top: 36px; margin-top: 60px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: var(--warm-gray); }
+  .footer-tag { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--rule); padding: 6px 14px; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div>
+      <div class="eyebrow">AyuVinc · Infrastructure Module 02 · Logo Reference</div>
+      <div class="doc-title">
+        Vaani
+        <span class="doc-title-deva">वाणी</span>
+      </div>
+      <div style="margin-top:10px; font-size:11px; color:rgba(245,244,240,0.35); font-style:italic; letter-spacing:0.02em;">Listens, transcribes and documents clinical conversations</div>
+    </div>
+    <div class="doc-meta">
+      Module 02 of 03<br>
+      Bilingual · EN + Devanagari<br>
+      Phase 4 · Version 1<br>
+      May 2026
+    </div>
+  </div>
+
+  <!-- PRIMARY LOCKUPS -->
+  <div class="section">
+    <div class="section-label">01 — Primary Lockup · Dark Ground</div>
+    <div class="two-col">
+
+      <!-- Full lockup -->
+      <div class="stage dark">
+        <div class="stage-label">Full lockup · Stacked</div>
+        <div class="lk-num">02</div>
+        <div class="lk-en">Vaani</div>
+        <div class="lk-dv">वाणी</div>
+        <div class="lk-rule"></div>
+        <div class="lk-desc">Clinical Scribe<br><span class="lk-parent">AyuVinc</span></div>
+      </div>
+
+      <!-- Inline lockup -->
+      <div class="stage dark" style="background:var(--navy-mid);">
+        <div class="stage-label">Inline lockup · with separator</div>
+        <div class="lk-num">02</div>
+        <div class="inline-row" style="margin-bottom:20px;">
+          <span class="sg" style="font-size:52px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Vaani</span>
+          <span class="inline-sep">·</span>
+          <span class="deva" style="font-size:50px; font-weight:300; color:var(--off-white); line-height:1.22;">वाणी</span>
+        </div>
+        <div class="lk-rule"></div>
+        <div class="lk-desc">Clinical Scribe<br><span class="lk-parent">AyuVinc</span></div>
+      </div>
+
+    </div>
+
+    <!-- Compact dark -->
+    <div class="two-col">
+      <div class="stage dark compact">
+        <div class="stage-label">Compact · Name only</div>
+        <div style="display:flex; align-items:center; gap:20px;">
+          <div class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); align-self:flex-start; padding-top:6px;">02</div>
+          <div>
+            <div class="sg" style="font-size:34px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Vaani</div>
+            <div class="deva" style="font-size:32px; font-weight:300; color:var(--off-white); line-height:1.25;">वाणी</div>
+          </div>
+        </div>
+      </div>
+      <div class="stage dark compact" style="background:var(--navy-mid);">
+        <div class="stage-label">Compact · Inline</div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal);">02</div>
+          <div class="sg" style="font-size:28px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Vaani</div>
+          <span style="color:rgba(245,244,240,0.2); font-size:16px;">·</span>
+          <div class="deva" style="font-size:26px; font-weight:300; color:var(--off-white); line-height:1.25;">वाणी</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHT VERSIONS -->
+  <div class="section">
+    <div class="section-label">02 — Monochrome · Light Ground</div>
+    <div class="two-col">
+
+      <div class="stage light">
+        <div class="stage-label">Full lockup · Light</div>
+        <div class="lk-num">02</div>
+        <div class="lk-en">Vaani</div>
+        <div class="lk-dv">वाणी</div>
+        <div class="lk-rule"></div>
+        <div class="lk-desc">Clinical Scribe<br><span class="lk-parent">AyuVinc</span></div>
+      </div>
+
+      <div class="stage light">
+        <div class="stage-label">Compact · Light</div>
+        <div style="display:flex; align-items:center; gap:20px;">
+          <div style="font-family:'DM Sans',sans-serif; font-size:9px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal-dark); align-self:flex-start; padding-top:4px;">02</div>
+          <div>
+            <div style="font-family:'Space Grotesk',sans-serif; font-size:34px; font-weight:300; letter-spacing:0.04em; color:#090d18; line-height:1;">Vaani</div>
+            <div style="font-family:'Noto Sans Devanagari',sans-serif; font-size:32px; font-weight:300; color:#090d18; line-height:1.25;">वाणी</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCALE BEHAVIOR -->
+  <div class="section">
+    <div class="section-label">03 — Scale Behavior</div>
+    <div class="size-table">
+      <div class="size-row" style="background:rgba(100,175,195,0.03);">
+        <div class="sz-label" style="color:var(--teal);">56px ★</div>
+        <div class="sz-sample">
+          <span class="sg" style="font-size:56px; font-weight:300; letter-spacing:0.04em; color:var(--off-white);">Vaani</span>
+          <span class="deva" style="font-size:54px; font-weight:300; color:var(--off-white); margin-left:16px;">वाणी</span>
+        </div>
+        <div class="sz-note">Primary display — both scripts</div>
+      </div>
+      <div class="size-row">
+        <div class="sz-label">36px</div>
+        <div class="sz-sample">
+          <span class="sg" style="font-size:36px; font-weight:300; letter-spacing:0.04em; color:var(--off-white);">Vaani</span>
+          <span class="deva" style="font-size:34px; font-weight:300; color:var(--off-white); margin-left:12px;">वाणी</span>
+        </div>
+        <div class="sz-note">Section headers — both scripts</div>
+      </div>
+      <div class="size-row">
+        <div class="sz-label">22px</div>
+        <div class="sz-sample">
+          <span class="sg" style="font-size:22px; font-weight:300; letter-spacing:0.04em; color:var(--off-white);">Vaani</span>
+          <span class="deva" style="font-size:21px; font-weight:300; color:var(--off-white); margin-left:10px;">वाणी</span>
+        </div>
+        <div class="sz-note">UI headers — both scripts</div>
+      </div>
+      <div class="size-row">
+        <div class="sz-label">16px</div>
+        <div class="sz-sample">
+          <span class="sg" style="font-size:16px; font-weight:400; letter-spacing:0.04em; color:var(--off-white);">Vaani</span>
+          <span class="deva" style="font-size:15px; font-weight:400; color:var(--off-white); margin-left:8px;">वाणी</span>
+        </div>
+        <div class="sz-note">Min size — both scripts</div>
+      </div>
+      <div class="size-row">
+        <div class="sz-label">13px</div>
+        <div class="sz-sample">
+          <span class="sg" style="font-size:13px; font-weight:400; letter-spacing:0.04em; color:var(--off-white);">Vaani</span>
+          <span style="font-size:9px; color:rgba(245,244,240,0.25); margin-left:10px; font-family:'DM Sans',sans-serif;">Devanagari drops below 16px</span>
+        </div>
+        <div class="sz-note">Labels — English only</div>
+      </div>
+      <div class="size-row">
+        <div class="sz-label">10px</div>
+        <div class="sz-sample">
+          <span class="dm" style="font-size:10px; font-weight:400; letter-spacing:0.18em; text-transform:uppercase; color:rgba(245,244,240,0.6);">VAANI</span>
+        </div>
+        <div class="sz-note">Min label — DM Sans uppercase</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD CONTEXT -->
+  <div class="section">
+    <div class="section-label">04 — Dashboard & Navigation Context</div>
+    <div style="display:grid; grid-template-columns:auto auto auto; gap:2px; justify-content:start; margin-bottom:24px;">
+
+      <!-- Nav item active -->
+      <div style="background:rgba(100,175,195,0.08); border:1px solid rgba(100,175,195,0.25); padding:14px 20px; display:flex; align-items:center; gap:14px; min-width:200px;">
+        <div style="display:flex; flex-direction:column;">
+          <div class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); margin-bottom:2px;">02</div>
+          <div class="sg" style="font-size:13px; font-weight:300; letter-spacing:0.04em; color:var(--off-white);">Vaani</div>
+          <div class="deva" style="font-size:12px; font-weight:300; color:rgba(245,244,240,0.5); line-height:1.3;">वाणी</div>
+        </div>
+      </div>
+
+      <!-- Nav item default -->
+      <div style="background:rgba(245,244,240,0.02); border:1px solid var(--rule); padding:14px 20px; display:flex; align-items:center; gap:14px; min-width:200px; opacity:0.6;">
+        <div style="display:flex; flex-direction:column;">
+          <div class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:rgba(155,150,145,0.5); margin-bottom:2px;">02</div>
+          <div class="sg" style="font-size:13px; font-weight:300; letter-spacing:0.04em; color:var(--off-white);">Vaani</div>
+          <div class="deva" style="font-size:12px; font-weight:300; color:rgba(245,244,240,0.5); line-height:1.3;">वाणी</div>
+        </div>
+      </div>
+
+      <!-- Chip / tag version -->
+      <div style="display:flex; align-items:center; gap:8px; border:1px solid var(--rule); padding:8px 16px; background:rgba(245,244,240,0.02);">
+        <span class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.18em; text-transform:uppercase; color:var(--teal);">02</span>
+        <span class="sg" style="font-size:12px; font-weight:300; letter-spacing:0.04em; color:var(--off-white);">Vaani</span>
+        <span style="color:rgba(245,244,240,0.2); font-size:10px;">·</span>
+        <span class="deva" style="font-size:11px; font-weight:300; color:rgba(245,244,240,0.65);">वाणी</span>
+      </div>
+
+    </div>
+    <p style="font-size:11px; color:rgba(245,244,240,0.3); line-height:1.8; max-width:600px;">
+      In navigation and dashboard contexts, the layer number (02) appears above the name as a structural identifier.
+      Active state uses the teal system color. The Devanagari sits below the English name, visible but restrained.
+    </p>
+  </div>
+
+  <!-- SPECS -->
+  <div class="section">
+    <div class="section-label">05 — Specification Reference</div>
+    <div class="spec-list">
+      <div class="spec-row">
+        <div class="sp-lbl">Module</div>
+        <div class="sp-val">Vaani · वाणी · Layer 02 · Clinical Scribe</div>
+      </div>
+      <div class="spec-row">
+        <div class="sp-lbl">Layer num</div>
+        <div class="sp-val">DM Sans 400 · 9px · letter-spacing 0.20em · uppercase · var(--teal) oklch(62% 0.10 195)</div>
+      </div>
+      <div class="spec-row">
+        <div class="sp-lbl">English</div>
+        <div class="sp-val">Space Grotesk 300 · 56px primary · letter-spacing 0.04em · CamelCase · #f5f4f0</div>
+      </div>
+      <div class="spec-row">
+        <div class="sp-lbl">Devanagari</div>
+        <div class="sp-val">Noto Sans Devanagari 300 · 54px (−4% optical vs EN) · natural tracking · #f5f4f0</div>
+      </div>
+      <div class="spec-row">
+        <div class="sp-lbl">Rule</div>
+        <div class="sp-val">1px · #f5f4f0 at 12% opacity · full lockup width · 20px below Devanagari</div>
+      </div>
+      <div class="spec-row">
+        <div class="sp-lbl">Descriptor</div>
+        <div class="sp-val">DM Sans 400 · 8px · 0.24em · uppercase · #f5f4f0 at 30% · 12px below rule</div>
+      </div>
+      <div class="spec-row">
+        <div class="sp-lbl">Parent ref</div>
+        <div class="sp-val">DM Sans 400 · 8px · "AyuVinc" · #f5f4f0 at 18% · new line below descriptor</div>
+      </div>
+      <div class="spec-row">
+        <div class="sp-lbl">Min Deva size</div>
+        <div class="sp-val">16px screen · 12pt print · Below this threshold: English only</div>
+      </div>
+      <div class="spec-row">
+        <div class="sp-lbl">Light ground</div>
+        <div class="sp-val">All #f5f4f0 → #090d18 · Teal → oklch(45% 0.10 195) · Rule opacity unchanged</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>AyuVinc Vision · Vaani · वाणी · Module 02 · Identity v1 · May 2026</span>
+    <span class="footer-tag">Module 02 · Vaani</span>
+  </div>
+
+</div>
+</body>
+</html>

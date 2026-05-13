@@ -1,0 +1,271 @@
+/* ═══════════════════════════════════════════════════════════════
+   AyuVinc Design System — CSS Design Tokens
+   Phase 5 · Version 1 · May 2026
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── FONT IMPORTS ────────────────────────────────────────────── */
+/* Add to <head> before using these tokens:
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Sans:wght@300;400&family=Noto+Sans+Devanagari:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+*/
+
+:root {
+
+  /* ── COLORS ─────────────────────────────────────────────────── */
+
+  /* Base palette */
+  --ayuvinc-navy:         #090d18;
+  --ayuvinc-navy-mid:     #0f1626;
+  --ayuvinc-navy-2:       #141c2e;
+  --ayuvinc-off-white:    #f5f4f0;
+  --ayuvinc-warm-gray:    #9b9691;
+  --ayuvinc-teal:         oklch(62% 0.10 195);
+  --ayuvinc-teal-dark:    oklch(45% 0.10 195);
+  --ayuvinc-sage:         oklch(65% 0.07 155);
+
+  /* Semantic aliases */
+  --color-bg:             var(--ayuvinc-navy);
+  --color-bg-raised:      var(--ayuvinc-navy-mid);
+  --color-bg-elevated:    var(--ayuvinc-navy-2);
+  --color-surface-light:  var(--ayuvinc-off-white);
+  --color-text:           var(--ayuvinc-off-white);
+  --color-text-muted:     var(--ayuvinc-warm-gray);
+  --color-accent:         var(--ayuvinc-teal);
+  --color-accent-dark:    var(--ayuvinc-teal-dark);
+  --color-accent-alt:     var(--ayuvinc-sage);
+
+  /* Rule / border */
+  --color-rule:           rgba(155, 150, 145, 0.16);
+  --color-rule-strong:    rgba(155, 150, 145, 0.28);
+
+  /* Opacity variants — text on dark */
+  --color-text-100:       rgba(245, 244, 240, 1.00);
+  --color-text-80:        rgba(245, 244, 240, 0.80);
+  --color-text-60:        rgba(245, 244, 240, 0.60);
+  --color-text-40:        rgba(245, 244, 240, 0.40);
+  --color-text-30:        rgba(245, 244, 240, 0.30);
+  --color-text-20:        rgba(245, 244, 240, 0.20);
+  --color-text-18:        rgba(245, 244, 240, 0.18);
+
+  /* Opacity variants — text on light */
+  --color-ink-100:        rgba(9, 13, 24, 1.00);
+  --color-ink-60:         rgba(9, 13, 24, 0.60);
+  --color-ink-40:         rgba(9, 13, 24, 0.40);
+  --color-ink-30:         rgba(9, 13, 24, 0.30);
+  --color-ink-18:         rgba(9, 13, 24, 0.18);
+
+
+  /* ── TYPOGRAPHY ─────────────────────────────────────────────── */
+
+  /* Font families */
+  --font-identity:        'Space Grotesk', sans-serif;
+  --font-ui:              'DM Sans', sans-serif;
+  --font-devanagari:      'Noto Sans Devanagari', sans-serif;
+  --font-editorial:       'Cormorant Garamond', serif; /* vision canvas only */
+
+  /* Font weights */
+  --weight-extralight:    200;
+  --weight-light:         300;
+  --weight-regular:       400;
+  --weight-medium:        500;
+
+  /* Type scale */
+  --text-2xs:             8px;
+  --text-xs:              9px;
+  --text-sm:              11px;
+  --text-base:            13px;
+  --text-md:              16px;
+  --text-lg:              22px;
+  --text-xl:              28px;
+  --text-2xl:             36px;
+  --text-3xl:             48px;
+  --text-4xl:             56px;
+  --text-5xl:             72px;
+
+  /* Letter spacing */
+  --tracking-snug:        0.02em;
+  --tracking-normal:      0.04em;    /* wordmark primary */
+  --tracking-label:       0.14em;
+  --tracking-caps:        0.18em;    /* wordmark uppercase / institutional */
+  --tracking-caps-wide:   0.22em;
+  --tracking-descriptor:  0.24em;
+  --tracking-eyebrow:     0.26em;
+
+
+  /* ── WORDMARK ────────────────────────────────────────────────── */
+
+  /* Primary — AyuVinc CamelCase */
+  --wm-font:              var(--font-identity);
+  --wm-weight:            var(--weight-light);
+  --wm-tracking:          var(--tracking-normal);
+  --wm-color:             var(--ayuvinc-off-white);
+
+  /* Secondary — AYUVINC uppercase (signage / formal) */
+  --wm-caps-tracking:     var(--tracking-caps);
+
+
+  /* ── MODULE SYSTEM ───────────────────────────────────────────── */
+
+  /* Layer numbers */
+  --module-01:            "01";      /* Dhara */
+  --module-02:            "02";      /* Vaani */
+  --module-03:            "03";      /* Setu  */
+
+  /* Module names — EN */
+  --module-01-name-en:    "Dhara";
+  --module-02-name-en:    "Vaani";
+  --module-03-name-en:    "Setu";
+
+  /* Module names — Devanagari */
+  --module-01-name-dv:    "धारा";
+  --module-02-name-dv:    "वाणी";
+  --module-03-name-dv:    "सेतु";
+
+  /* Module descriptors */
+  --module-01-desc:       "Continuous Health Records";
+  --module-02-desc:       "Clinical Scribe";
+  --module-03-desc:       "Transplant Coordination";
+
+
+  /* ── LOCKUP SPACING ──────────────────────────────────────────── */
+
+  --lockup-num-mb:            6px;   /* layer number → EN name */
+  --lockup-deva-mb:           20px;  /* Devanagari → structural rule */
+  --lockup-rule-mb:           12px;  /* rule → descriptor */
+  --lockup-rule-h:            1px;   /* rule stroke */
+  --lockup-rule-opacity:      0.12;
+  --lockup-desc-opacity:      0.30;
+  --lockup-parent-opacity:    0.18;
+  --lockup-deva-size-ratio:   0.96;  /* Devanagari optical size vs EN */
+  --lockup-deva-min-px:       16px;  /* never render Devanagari below this */
+
+
+  /* ── SPACING SCALE ───────────────────────────────────────────── */
+
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   UTILITY CLASSES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Wordmark — primary */
+.ayuvinc-wordmark {
+  font-family:    var(--wm-font);
+  font-weight:    var(--wm-weight);
+  letter-spacing: var(--wm-tracking);
+  color:          var(--wm-color);
+  line-height:    1;
+}
+
+/* Wordmark — uppercase / institutional */
+.ayuvinc-wordmark-caps {
+  font-family:    var(--wm-font);
+  font-weight:    var(--wm-weight);
+  letter-spacing: var(--wm-caps-tracking);
+  text-transform: uppercase;
+  color:          var(--wm-color);
+  line-height:    1;
+}
+
+/* Module layer number */
+.module-num {
+  font-family:    var(--font-ui);
+  font-weight:    var(--weight-regular);
+  font-size:      var(--text-xs);
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color:          var(--color-accent);
+  margin-bottom:  var(--lockup-num-mb);
+  line-height:    1;
+}
+
+/* Module English name */
+.module-name-en {
+  font-family:    var(--font-identity);
+  font-weight:    var(--weight-light);
+  letter-spacing: var(--tracking-normal);
+  color:          var(--color-text);
+  line-height:    1;
+}
+
+/* Module Devanagari name */
+.module-name-dv {
+  font-family:    var(--font-devanagari);
+  font-weight:    var(--weight-light);
+  color:          var(--color-text);
+  line-height:    1.22;
+  margin-bottom:  var(--lockup-deva-mb);
+}
+
+/* Module structural rule */
+.module-rule {
+  height:         var(--lockup-rule-h);
+  background:     var(--color-text);
+  opacity:        var(--lockup-rule-opacity);
+  width:          100%;
+  margin-bottom:  var(--lockup-rule-mb);
+}
+
+/* Module descriptor */
+.module-desc {
+  font-family:    var(--font-ui);
+  font-weight:    var(--weight-regular);
+  font-size:      var(--text-2xs);
+  letter-spacing: var(--tracking-descriptor);
+  text-transform: uppercase;
+  color:          var(--color-text-30);
+  line-height:    1.65;
+}
+
+/* Module parent attribution */
+.module-parent {
+  color:          var(--color-text-18);
+}
+
+/* Eyebrow / section label */
+.eyebrow {
+  font-family:    var(--font-ui);
+  font-weight:    var(--weight-regular);
+  font-size:      var(--text-2xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color:          var(--color-accent);
+}
+
+/* UI label */
+.label {
+  font-family:    var(--font-ui);
+  font-weight:    var(--weight-regular);
+  font-size:      var(--text-2xs);
+  letter-spacing: var(--tracking-caps-wide);
+  text-transform: uppercase;
+  color:          var(--color-text-60);
+}
+
+/* Structural divider */
+.rule {
+  height:         1px;
+  background:     var(--color-rule);
+  border:         none;
+  margin:         0;
+}
+
+/* Card surface */
+.surface {
+  background:     var(--color-bg-raised);
+  border:         1px solid var(--color-rule);
+}

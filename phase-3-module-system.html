@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AyuVinc · Phase 3 · Module System Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Sans:wght@300;400&family=Noto+Sans+Devanagari:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:      #090d18;
+    --navy-mid:  #0f1626;
+    --navy-2:    #141c2e;
+    --off-white: #f5f4f0;
+    --warm-gray: #9b9691;
+    --teal:      oklch(62% 0.10 195);
+    --sage:      oklch(65% 0.07 155);
+    --rule:      rgba(155,150,145,0.16);
+    --rule-hi:   rgba(155,150,145,0.28);
+  }
+
+  html, body {
+    background: var(--navy);
+    color: var(--off-white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .doc { max-width: 1200px; margin: 0 auto; padding: 72px 60px 120px; }
+
+  .doc-header {
+    display: grid; grid-template-columns: 1fr auto; align-items: end;
+    border-bottom: 1px solid var(--rule-hi); padding-bottom: 48px; margin-bottom: 80px; gap: 40px;
+  }
+  .eyebrow { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
+  .doc-title { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; line-height: 1.1; }
+  .doc-title em { font-style: italic; color: rgba(245,244,240,0.4); }
+  .doc-sub { margin-top: 12px; font-size: 12px; color: rgba(245,244,240,0.4); line-height: 1.75; max-width: 560px; }
+  .doc-meta { text-align: right; font-size: 10px; color: var(--warm-gray); letter-spacing: 0.06em; line-height: 2.1; }
+
+  .section { margin-bottom: 88px; }
+  .section-label {
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal);
+    margin-bottom: 32px; display: flex; align-items: center; gap: 14px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+  .sg  { font-family: 'Space Grotesk', sans-serif; }
+  .dm  { font-family: 'DM Sans', sans-serif; }
+  .deva { font-family: 'Noto Sans Devanagari', sans-serif; }
+
+  /* ── HIERARCHY DIAGRAM ── */
+  .hierarchy {
+    background: var(--navy-mid);
+    border: 1px solid var(--rule);
+    padding: 52px 56px;
+    margin-bottom: 24px;
+  }
+  .h-parent {
+    display: flex; align-items: center; gap: 20px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 36px;
+  }
+  .h-parent-label { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(155,150,145,0.4); margin-bottom: 8px; }
+  .h-children { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .h-child {
+    background: rgba(245,244,240,0.02);
+    border: 1px solid var(--rule);
+    padding: 24px 24px;
+    position: relative;
+  }
+  .h-child::before {
+    content: '';
+    position: absolute; top: -37px; left: 50%;
+    width: 1px; height: 37px;
+    background: var(--rule);
+  }
+  .h-child-num { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+  .h-child-en { display: block; }
+  .h-child-deva { display: block; }
+  .h-child-desc {
+    margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--rule);
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(245,244,240,0.3); line-height: 1.5;
+  }
+
+  /* ── ANATOMY DIAGRAM ── */
+  .anatomy {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 24px;
+  }
+  .anatomy-demo {
+    background: var(--navy); border: 1px solid var(--rule);
+    padding: 44px 48px; position: relative;
+    display: flex; flex-direction: column; align-items: flex-start;
+  }
+  .anatomy-spec {
+    background: rgba(245,244,240,0.02); border: 1px solid var(--rule);
+    padding: 28px 32px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+
+  /* Annotation lines */
+  .ann { position: relative; }
+  .ann-label {
+    position: absolute; right: calc(100% + 16px); top: 50%;
+    transform: translateY(-50%);
+    font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(155,150,145,0.45); white-space: nowrap;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ann-label::after {
+    content: ''; display: block; width: 12px; height: 1px;
+    background: rgba(155,150,145,0.25);
+  }
+
+  /* Spec rows */
+  .spec-row { display: grid; grid-template-columns: 100px 1fr; gap: 2px; margin-bottom: 2px; }
+  .spec-lbl {
+    background: rgba(245,244,240,0.02); border: 1px solid var(--rule);
+    padding: 12px 14px; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); display: flex; align-items: center;
+  }
+  .spec-val {
+    background: rgba(245,244,240,0.02); border: 1px solid var(--rule);
+    padding: 12px 16px; font-size: 11px; color: rgba(245,244,240,0.5);
+    line-height: 1.6; display: flex; align-items: center;
+  }
+
+  /* ── THREE MODULE SYSTEM ── */
+  .module-system {
+    display: grid; gap: 2px; margin-bottom: 24px;
+  }
+  .module-row {
+    display: grid;
+    grid-template-columns: 56px 1fr 1fr 200px;
+    gap: 0;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .module-row.header-row {
+    background: rgba(245,244,240,0.02);
+    border-color: var(--rule);
+  }
+  .mr-num {
+    background: rgba(245,244,240,0.02);
+    border-right: 1px solid var(--rule);
+    padding: 20px 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--teal);
+  }
+  .mr-en {
+    padding: 18px 32px;
+    border-right: 1px solid var(--rule);
+    display: flex; align-items: center;
+  }
+  .mr-deva {
+    padding: 18px 32px;
+    border-right: 1px solid var(--rule);
+    display: flex; align-items: center;
+  }
+  .mr-desc {
+    padding: 18px 20px;
+    display: flex; align-items: center;
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(245,244,240,0.3);
+  }
+
+  /* ── SYSTEM IN CONTEXT PANELS ── */
+  .context-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 24px; }
+  .ctx-panel {
+    border: 1px solid var(--rule); padding: 44px 44px;
+    position: relative; min-height: 300px;
+  }
+  .ctx-panel.dark  { background: var(--navy); }
+  .ctx-panel.light { background: var(--off-white); }
+  .ctx-label {
+    position: absolute; top: 18px; left: 22px;
+    font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(155,150,145,0.4);
+  }
+  .ctx-panel.light .ctx-label { color: rgba(9,13,24,0.3); }
+
+  /* ── RULES GRID ── */
+  .rules-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .rule-card {
+    background: rgba(245,244,240,0.02); border: 1px solid var(--rule);
+    padding: 28px 28px 24px;
+  }
+  .rule-card-label { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
+  .rule-card-body { font-size: 11px; color: rgba(245,244,240,0.45); line-height: 1.75; }
+
+  /* ── DIFFERENTIATION TABLE ── */
+  .diff-table { display: grid; gap: 2px; margin-bottom: 24px; }
+  .diff-row {
+    display: grid; grid-template-columns: 140px 1fr 1fr 1fr;
+    border: 1px solid var(--rule); overflow: hidden;
+  }
+  .diff-axis {
+    background: rgba(245,244,240,0.02); border-right: 1px solid var(--rule);
+    padding: 14px 18px; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); display: flex; align-items: center;
+  }
+  .diff-cell {
+    padding: 14px 18px; font-size: 11px; color: rgba(245,244,240,0.5);
+    line-height: 1.5; border-right: 1px solid var(--rule);
+    display: flex; align-items: center;
+  }
+  .diff-cell:last-child { border-right: none; }
+  .diff-row.header .diff-cell { font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(155,150,145,0.5); background: rgba(245,244,240,0.02); font-family: 'DM Sans', sans-serif; font-weight: 400; }
+
+  /* ── LOCKUP FORMAT FULL ── */
+  .lockup-full {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 2px;
+  }
+  .lf-card {
+    background: var(--navy); border: 1px solid var(--rule);
+    padding: 44px 40px;
+    display: flex; flex-direction: column; align-items: flex-start;
+    position: relative; min-height: 280px;
+  }
+  .lf-num {
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 16px;
+  }
+
+  /* ── RECOMMENDATION ── */
+  .recommendation {
+    background: rgba(100,175,195,0.05);
+    border: 1px solid rgba(100,175,195,0.3);
+    padding: 40px 48px;
+  }
+  .rec-eyebrow { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
+  .rec-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; margin-bottom: 16px; }
+  .rec-body { font-size: 12px; color: rgba(245,244,240,0.5); line-height: 1.85; max-width: 760px; }
+
+  .doc-footer {
+    border-top: 1px solid var(--rule); padding-top: 40px; margin-top: 80px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-note { font-size: 11px; color: var(--warm-gray); font-style: italic; line-height: 1.7; }
+  .footer-tag { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--rule); padding: 7px 16px; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div>
+      <div class="eyebrow">AyuVinc · Phase 3 · Module System Architecture</div>
+      <div class="doc-title">One System<br><em>Three Infrastructure Layers</em></div>
+      <div class="doc-sub">
+        Dhara, Vaani, and Setu are not three brands. They are three numbered strata
+        of one intelligence infrastructure. This document defines the shared DNA — 
+        the lockup format, the typographic logic, and the differentiation rules —
+        that all three modules inherit equally.
+      </div>
+    </div>
+    <div class="doc-meta">
+      Phase 3 of 6<br>
+      No symbols · No marks<br>
+      One typographic system<br>
+      May 2026
+    </div>
+  </div>
+
+  <!-- SECTION 01: HIERARCHY -->
+  <div class="section">
+    <div class="section-label">01 — System Hierarchy</div>
+
+    <div class="hierarchy">
+      <!-- Parent -->
+      <div class="h-parent">
+        <div>
+          <div class="h-parent-label">Master brand · English only · No Devanagari</div>
+          <span class="sg" style="font-size:52px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">AyuVinc</span>
+        </div>
+        <div style="margin-left:40px; font-size:11px; color:rgba(245,244,240,0.3); line-height:1.8; max-width:400px; border-left:1px solid var(--rule); padding-left:32px;">
+          The master brand stands alone. Global, institutional, English-only. 
+          It does not carry Devanagari. It does not carry a symbol. 
+          Its authority comes from typographic restraint alone.
+        </div>
+      </div>
+
+      <!-- Three modules below -->
+      <div style="font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(155,150,145,0.35); margin-bottom:20px; padding-left:4px;">Infrastructure modules · Bilingual · Three strata of one system</div>
+      <div class="h-children">
+        <div class="h-child">
+          <div class="h-child-num">Layer 01</div>
+          <span class="sg h-child-en" style="font-size:28px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Dhara</span>
+          <span class="deva h-child-deva" style="font-size:26px; font-weight:300; color:var(--off-white); line-height:1.3;">धारा</span>
+          <div class="h-child-desc">Data Flow<br>Longitudinal Records</div>
+        </div>
+        <div class="h-child">
+          <div class="h-child-num">Layer 02</div>
+          <span class="sg h-child-en" style="font-size:28px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Vaani</span>
+          <span class="deva h-child-deva" style="font-size:26px; font-weight:300; color:var(--off-white); line-height:1.3;">वाणी</span>
+          <div class="h-child-desc">Clinical Scribe<br>Voice of Care</div>
+        </div>
+        <div class="h-child">
+          <div class="h-child-num">Layer 03</div>
+          <span class="sg h-child-en" style="font-size:28px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Setu</span>
+          <span class="deva h-child-deva" style="font-size:26px; font-weight:300; color:var(--off-white); line-height:1.3;">सेतु</span>
+          <div class="h-child-desc">Transplant Coordination<br>System Connectivity</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:11px; color:rgba(245,244,240,0.35); line-height:1.8; max-width:680px;">
+      The three modules sit one level below AyuVinc. They inherit the typographic system but extend it 
+      with Devanagari as a co-equal cultural layer. They are always numbered — 01, 02, 03 — because 
+      they are infrastructure strata, not separate products. The number is the only differentiator 
+      beyond the name itself.
+    </p>
+  </div>
+
+  <!-- SECTION 02: LOCKUP ANATOMY -->
+  <div class="section">
+    <div class="section-label">02 — Lockup Anatomy · Shared Format</div>
+
+    <div class="anatomy">
+      <!-- Live demo with annotations -->
+      <div class="anatomy-demo" style="padding-left:180px;">
+        <div style="position:absolute; top:44px; left:20px; right:0; bottom:0; pointer-events:none;">
+
+          <!-- Layer num annotation -->
+          <div style="position:absolute; top:0; left:0; right:0; display:flex; align-items:center; gap:0;">
+            <div style="font-size:8px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(100,175,195,0.5); white-space:nowrap; text-align:right; width:140px;">Layer num</div>
+            <div style="width:20px; height:1px; background:rgba(100,175,195,0.2); margin:0 8px;"></div>
+          </div>
+
+          <!-- EN annotation -->
+          <div style="position:absolute; top:28px; left:0; right:0; display:flex; align-items:center; gap:0;">
+            <div style="font-size:8px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(100,175,195,0.5); white-space:nowrap; text-align:right; width:140px;">English name</div>
+            <div style="width:20px; height:1px; background:rgba(100,175,195,0.2); margin:0 8px;"></div>
+          </div>
+
+          <!-- Deva annotation -->
+          <div style="position:absolute; top:76px; left:0; right:0; display:flex; align-items:center; gap:0;">
+            <div style="font-size:8px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(100,175,195,0.5); white-space:nowrap; text-align:right; width:140px;">Devanagari</div>
+            <div style="width:20px; height:1px; background:rgba(100,175,195,0.2); margin:0 8px;"></div>
+          </div>
+
+          <!-- Rule annotation -->
+          <div style="position:absolute; top:128px; left:0; right:0; display:flex; align-items:center; gap:0;">
+            <div style="font-size:8px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(100,175,195,0.5); white-space:nowrap; text-align:right; width:140px;">Structural rule</div>
+            <div style="width:20px; height:1px; background:rgba(100,175,195,0.2); margin:0 8px;"></div>
+          </div>
+
+          <!-- Desc annotation -->
+          <div style="position:absolute; top:144px; left:0; right:0; display:flex; align-items:center; gap:0;">
+            <div style="font-size:8px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(100,175,195,0.5); white-space:nowrap; text-align:right; width:140px;">Descriptor + parent</div>
+            <div style="width:20px; height:1px; background:rgba(100,175,195,0.2); margin:0 8px;"></div>
+          </div>
+        </div>
+
+        <!-- The actual lockup -->
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:0;">
+          <div class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); margin-bottom:6px; line-height:1;">01</div>
+          <div class="sg" style="font-size:48px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Dhara</div>
+          <div class="deva" style="font-size:46px; font-weight:300; color:var(--off-white); line-height:1.25; margin-bottom:16px;">धारा</div>
+          <div style="height:1px; background:rgba(245,244,240,0.12); width:100%; margin-bottom:10px;"></div>
+          <div class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.24em; text-transform:uppercase; color:rgba(245,244,240,0.3); line-height:1.5;">Continuous Health Records<br><span style="color:rgba(245,244,240,0.2);">AyuVinc</span></div>
+        </div>
+      </div>
+
+      <!-- Spec breakdown -->
+      <div class="anatomy-spec">
+        <div style="font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(155,150,145,0.4); margin-bottom:20px;">Element specifications</div>
+
+        <div class="spec-row">
+          <div class="spec-lbl">Layer num</div>
+          <div class="spec-val">DM Sans 400 · 9px · 0.20em · uppercase · teal · margin-bottom 6px</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-lbl">English</div>
+          <div class="spec-val">Space Grotesk 300 · 48px primary · 0.04em tracking · CamelCase</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-lbl">Devanagari</div>
+          <div class="spec-val">Noto Sans Devanagari 300 · 46px (−4% optical) · natural tracking</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-lbl">Rule</div>
+          <div class="spec-val">1px horizontal · #f5f4f0 at 12% opacity · full lockup width · margin 16px above</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-lbl">Descriptor</div>
+          <div class="spec-val">DM Sans 400 · 8px · 0.24em · uppercase · #f5f4f0 at 30%</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-lbl">Parent</div>
+          <div class="spec-val">DM Sans 400 · 8px · "AyuVinc" · #f5f4f0 at 20% · same line as descriptor</div>
+        </div>
+        <div class="spec-row" style="margin-top:2px;">
+          <div class="spec-lbl">Alignment</div>
+          <div class="spec-val">All elements left-aligned. No centering. Infrastructure logic: reads like a technical specification.</div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-lbl">Spacing</div>
+          <div class="spec-val">EN → Deva: 0px gap (natural leading of Deva handles spacing). Deva → Rule: 16px. Rule → Descriptor: 10px.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 03: ALL THREE MODULES, SHARED DNA -->
+  <div class="section">
+    <div class="section-label">03 — All Three Modules · One Typographic System</div>
+
+    <div class="module-system">
+      <!-- Header row -->
+      <div class="module-row header-row">
+        <div class="mr-num" style="font-size:8px; letter-spacing:0.14em; color:rgba(155,150,145,0.4); background:rgba(245,244,240,0.02);">No.</div>
+        <div class="mr-en" style="padding:14px 32px; font-size:8px; letter-spacing:0.16em; text-transform:uppercase; color:rgba(155,150,145,0.4);">English Name</div>
+        <div class="mr-deva" style="padding:14px 32px; font-size:8px; letter-spacing:0.16em; text-transform:uppercase; color:rgba(155,150,145,0.4);">Devanagari</div>
+        <div class="mr-desc" style="padding:14px 20px; font-size:8px; background:rgba(245,244,240,0.02);">Infrastructure Role</div>
+      </div>
+
+      <!-- Dhara -->
+      <div class="module-row">
+        <div class="mr-num">01</div>
+        <div class="mr-en">
+          <span class="sg" style="font-size:36px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Dhara</span>
+        </div>
+        <div class="mr-deva">
+          <span class="deva" style="font-size:34px; font-weight:300; color:var(--off-white); line-height:1.25;">धारा</span>
+        </div>
+        <div class="mr-desc">Continuous Health Records<br>Continuous Health Records</div>
+      </div>
+
+      <!-- Vaani -->
+      <div class="module-row">
+        <div class="mr-num">02</div>
+        <div class="mr-en">
+          <span class="sg" style="font-size:36px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Vaani</span>
+        </div>
+        <div class="mr-deva">
+          <span class="deva" style="font-size:34px; font-weight:300; color:var(--off-white); line-height:1.25;">वाणी</span>
+        </div>
+        <div class="mr-desc">Clinical Scribe<br>Listens and transcribes clinical conversations</div>
+      </div>
+
+      <!-- Setu -->
+      <div class="module-row">
+        <div class="mr-num">03</div>
+        <div class="mr-en">
+          <span class="sg" style="font-size:36px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Setu</span>
+        </div>
+        <div class="mr-deva">
+          <span class="deva" style="font-size:34px; font-weight:300; color:var(--off-white); line-height:1.25;">सेतु</span>
+        </div>
+        <div class="mr-desc">Transplant Coordination<br>Transplant workflow coordination</div>
+      </div>
+    </div>
+
+    <p style="font-size:11px; color:rgba(245,244,240,0.35); line-height:1.8; max-width:680px;">
+      All three modules are typographically identical in treatment. The name and number are 
+      the only differentiators. There is no color variation, no symbol variation, no layout variation. 
+      Seen together, they read as one operating system — not three separate products.
+    </p>
+  </div>
+
+  <!-- SECTION 04: DIFFERENTIATION TABLE -->
+  <div class="section">
+    <div class="section-label">04 — Differentiation Logic · What Changes, What Never Changes</div>
+
+    <div class="diff-table">
+      <div class="diff-row header">
+        <div class="diff-axis"></div>
+        <div class="diff-cell">Dhara · 01</div>
+        <div class="diff-cell">Vaani · 02</div>
+        <div class="diff-cell">Setu · 03</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-axis">Changes</div>
+        <div class="diff-cell">Name · Number · Descriptor</div>
+        <div class="diff-cell">Name · Number · Descriptor</div>
+        <div class="diff-cell">Name · Number · Descriptor</div>
+      </div>
+      <div class="diff-row" style="background:rgba(100,175,195,0.02);">
+        <div class="diff-axis" style="color:var(--sage);">Never changes</div>
+        <div class="diff-cell" style="color:rgba(245,244,240,0.6);">Typeface · Weight · Color · Layout · Tracking · Spacing · Rule weight · Descriptor style</div>
+        <div class="diff-cell" style="color:rgba(245,244,240,0.6);">Same as Dhara</div>
+        <div class="diff-cell" style="color:rgba(245,244,240,0.6);">Same as Dhara</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-axis">Typeface</div>
+        <div class="diff-cell">Space Grotesk 300</div>
+        <div class="diff-cell">Space Grotesk 300</div>
+        <div class="diff-cell">Space Grotesk 300</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-axis">Devanagari</div>
+        <div class="diff-cell">Noto Sans Deva 300</div>
+        <div class="diff-cell">Noto Sans Deva 300</div>
+        <div class="diff-cell">Noto Sans Deva 300</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-axis">Color</div>
+        <div class="diff-cell">#f5f4f0 on #090d18</div>
+        <div class="diff-cell">#f5f4f0 on #090d18</div>
+        <div class="diff-cell">#f5f4f0 on #090d18</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-axis">Number</div>
+        <div class="diff-cell" style="color:var(--teal);">01</div>
+        <div class="diff-cell" style="color:var(--teal);">02</div>
+        <div class="diff-cell" style="color:var(--teal);">03</div>
+      </div>
+    </div>
+
+    <p style="font-size:11px; color:rgba(245,244,240,0.35); line-height:1.8; max-width:680px;">
+      This is not limitation — it is system logic. The identical treatment is what makes them 
+      feel like strata of one infrastructure, not competing products. A national health system's 
+      subsystems do not have different visual personalities.
+    </p>
+  </div>
+
+  <!-- SECTION 05: FULL LOCKUPS — ALL THREE -->
+  <div class="section">
+    <div class="section-label">05 — Full Module Lockups · Dark Ground</div>
+
+    <div class="lockup-full">
+
+      <div class="lf-card">
+        <div class="lf-num">01</div>
+        <div class="sg" style="font-size:44px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Dhara</div>
+        <div class="deva" style="font-size:42px; font-weight:300; color:var(--off-white); line-height:1.25; margin-bottom:20px;">धारा</div>
+        <div style="height:1px; background:rgba(245,244,240,0.12); width:100%; margin-bottom:12px;"></div>
+        <div class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase; color:rgba(245,244,240,0.3); line-height:1.65;">Continuous Health Records<br><span style="color:rgba(245,244,240,0.18);">AyuVinc</span></div>
+      </div>
+
+      <div class="lf-card">
+        <div class="lf-num">02</div>
+        <div class="sg" style="font-size:44px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Vaani</div>
+        <div class="deva" style="font-size:42px; font-weight:300; color:var(--off-white); line-height:1.25; margin-bottom:20px;">वाणी</div>
+        <div style="height:1px; background:rgba(245,244,240,0.12); width:100%; margin-bottom:12px;"></div>
+        <div class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase; color:rgba(245,244,240,0.3); line-height:1.65;">Clinical Scribe<br><span style="color:rgba(245,244,240,0.18);">AyuVinc</span></div>
+      </div>
+
+      <div class="lf-card">
+        <div class="lf-num">03</div>
+        <div class="sg" style="font-size:44px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">Setu</div>
+        <div class="deva" style="font-size:42px; font-weight:300; color:var(--off-white); line-height:1.25; margin-bottom:20px;">सेतु</div>
+        <div style="height:1px; background:rgba(245,244,240,0.12); width:100%; margin-bottom:12px;"></div>
+        <div class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase; color:rgba(245,244,240,0.3); line-height:1.65;">Transplant Coordination<br><span style="color:rgba(245,244,240,0.18);">AyuVinc</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 06: DARK + LIGHT -->
+  <div class="section">
+    <div class="section-label">06 — System on Light Ground · Monochrome</div>
+
+    <div class="lockup-full">
+
+      <div style="background:var(--off-white); border:1px solid rgba(9,13,24,0.1); padding:44px 40px; display:flex; flex-direction:column; align-items:flex-start;">
+        <div class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:oklch(45% 0.10 195); margin-bottom:6px;">01</div>
+        <div class="sg" style="font-size:44px; font-weight:300; letter-spacing:0.04em; color:#090d18; line-height:1;">Dhara</div>
+        <div class="deva" style="font-size:42px; font-weight:300; color:#090d18; line-height:1.25; margin-bottom:20px;">धारा</div>
+        <div style="height:1px; background:rgba(9,13,24,0.12); width:100%; margin-bottom:12px;"></div>
+        <div class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase; color:rgba(9,13,24,0.3); line-height:1.65;">Continuous Health Records<br><span style="color:rgba(9,13,24,0.18);">AyuVinc</span></div>
+      </div>
+
+      <div style="background:var(--off-white); border:1px solid rgba(9,13,24,0.1); padding:44px 40px; display:flex; flex-direction:column; align-items:flex-start;">
+        <div class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:oklch(45% 0.10 195); margin-bottom:6px;">02</div>
+        <div class="sg" style="font-size:44px; font-weight:300; letter-spacing:0.04em; color:#090d18; line-height:1;">Vaani</div>
+        <div class="deva" style="font-size:42px; font-weight:300; color:#090d18; line-height:1.25; margin-bottom:20px;">वाणी</div>
+        <div style="height:1px; background:rgba(9,13,24,0.12); width:100%; margin-bottom:12px;"></div>
+        <div class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase; color:rgba(9,13,24,0.3); line-height:1.65;">Clinical Scribe<br><span style="color:rgba(9,13,24,0.18);">AyuVinc</span></div>
+      </div>
+
+      <div style="background:var(--off-white); border:1px solid rgba(9,13,24,0.1); padding:44px 40px; display:flex; flex-direction:column; align-items:flex-start;">
+        <div class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:oklch(45% 0.10 195); margin-bottom:6px;">03</div>
+        <div class="sg" style="font-size:44px; font-weight:300; letter-spacing:0.04em; color:#090d18; line-height:1;">Setu</div>
+        <div class="deva" style="font-size:42px; font-weight:300; color:#090d18; line-height:1.25; margin-bottom:20px;">सेतु</div>
+        <div style="height:1px; background:rgba(9,13,24,0.12); width:100%; margin-bottom:12px;"></div>
+        <div class="dm" style="font-size:8px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase; color:rgba(9,13,24,0.3); line-height:1.65;">Transplant Coordination<br><span style="color:rgba(9,13,24,0.18);">AyuVinc</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 07: SYSTEM RULES -->
+  <div class="section">
+    <div class="section-label">07 — Governance Rules</div>
+
+    <div class="rules-grid">
+      <div class="rule-card">
+        <div class="rule-card-label">Rule 1 — No symbols</div>
+        <div class="rule-card-body">
+          No module carries a geometric mark, icon, or abstract symbol. Ever.
+          The name is the identity. The number is the position.
+          Adding a symbol would fragment the system into separate products.
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-label">Rule 2 — No color differentiation</div>
+        <div class="rule-card-body">
+          All three modules use the same color system. Teal (#f5f4f0 on #090d18) 
+          applies to layer numbers only — the same teal for all three. 
+          Different colors per module would create separate brand identities.
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-label">Rule 3 — Devanagari is always equal</div>
+        <div class="rule-card-body">
+          Devanagari and English are co-equal layers. 
+          Devanagari never appears smaller than 16px. 
+          It is never a subtitle, caption, or translation. 
+          It carries the name; it does not explain it.
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-label">Rule 4 — The number is structural</div>
+        <div class="rule-card-body">
+          01, 02, 03 are infrastructure layer identifiers — not rankings, not order of importance.
+          They communicate: these are parts of a numbered system, like network layers or 
+          technical protocol stacks.
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-label">Rule 5 — Always left-aligned</div>
+        <div class="rule-card-body">
+          Module lockups are always left-aligned. Never centered. 
+          Centered type reads as designed. Left-aligned type reads as structured.
+          Infrastructure is structured, not designed.
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-label">Rule 6 — Parent always present</div>
+        <div class="rule-card-body">
+          "AyuVinc" always appears in the full lockup's descriptor line — 
+          at minimum legible opacity, but always present. 
+          A module is never seen fully divorced from the parent system.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDATION -->
+  <div class="section">
+    <div class="section-label">08 — Phase 3 Summary</div>
+
+    <div class="recommendation">
+      <div class="rec-eyebrow">Module System Architecture · Approved Direction</div>
+      <div class="rec-title">One system · Three layers · No symbols · Layer numbers as the only differentiator</div>
+      <div class="rec-body">
+        The module identity system is typographic throughout. Space Grotesk 300 for English. 
+        Noto Sans Devanagari 300 for the cultural continuity layer. DM Sans 400 for all labels and metadata. 
+        The three modules share identical treatment — the name, the Devanagari form, and the layer number 
+        are the complete identity. Nothing else is needed. The system reads as institutional infrastructure 
+        because it behaves like institutional infrastructure: consistent, numbered, restrained.
+        <br><br>
+        Approving Phase 3 unlocks Phase 4 — the three individual module logo files 
+        (Dhara, Vaani, Setu) built from this exact specification.
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div class="footer-note">
+      Approve Phase 3 to unlock Phase 4 — individual module logo files.<br>
+      Dhara, Vaani, and Setu will be built from the specification above, with no deviation.
+    </div>
+    <div class="footer-tag">Phase 3 · Awaiting Approval</div>
+  </div>
+
+</div>
+</body>
+</html>

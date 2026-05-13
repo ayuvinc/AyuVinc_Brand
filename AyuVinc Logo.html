@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AyuVinc · Master Brand Wordmark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=DM+Sans:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:      #090d18;
+    --navy-mid:  #0f1626;
+    --off-white: #f5f4f0;
+    --warm-gray: #9b9691;
+    --teal:      oklch(62% 0.10 195);
+    --teal-dark: oklch(45% 0.10 195);
+    --sage:      oklch(65% 0.07 155);
+    --rule:      rgba(155,150,145,0.16);
+    --rule-hi:   rgba(155,150,145,0.28);
+  }
+  html, body { background: var(--navy); color: var(--off-white); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; min-height: 100vh; }
+  .doc { max-width: 1100px; margin: 0 auto; padding: 64px 56px 100px; }
+  .doc-header { display: grid; grid-template-columns: 1fr auto; align-items: end; border-bottom: 1px solid var(--rule-hi); padding-bottom: 40px; margin-bottom: 72px; gap: 40px; }
+  .eyebrow { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+  .doc-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; line-height: 1.1; }
+  .doc-title em { font-style: italic; color: rgba(245,244,240,0.4); }
+  .doc-meta { text-align: right; font-size: 10px; color: var(--warm-gray); letter-spacing: 0.06em; line-height: 2.1; }
+  .section { margin-bottom: 72px; }
+  .section-label { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 2px; }
+  .stage { border: 1px solid var(--rule); padding: 64px 56px; position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 300px; }
+  .stage.dark  { background: var(--navy); }
+  .stage.mid   { background: var(--navy-mid); }
+  .stage.light { background: var(--off-white); border-color: rgba(9,13,24,0.1); }
+  .stage-label { position: absolute; top: 16px; left: 20px; font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(155,150,145,0.4); }
+  .stage.light .stage-label { color: rgba(9,13,24,0.28); }
+  .sg { font-family: 'Space Grotesk', sans-serif; }
+  .dm { font-family: 'DM Sans', sans-serif; }
+  .size-table { display: grid; gap: 2px; margin-bottom: 24px; }
+  .size-row { display: grid; grid-template-columns: 80px 1fr 180px; border: 1px solid var(--rule); background: rgba(245,244,240,0.02); align-items: center; }
+  .sz-label { padding: 14px 14px; font-size: 9px; letter-spacing: 0.12em; color: rgba(155,150,145,0.4); border-right: 1px solid var(--rule); text-align: right; }
+  .sz-sample { padding: 14px 24px; line-height: 1; }
+  .sz-note { padding: 14px 18px; font-size: 10px; color: rgba(245,244,240,0.3); border-left: 1px solid var(--rule); }
+  .spec-list { display: grid; gap: 2px; }
+  .spec-row { display: grid; grid-template-columns: 140px 1fr; gap: 2px; }
+  .sp-lbl { background: rgba(245,244,240,0.02); border: 1px solid var(--rule); padding: 12px 14px; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); display: flex; align-items: center; }
+  .sp-val { background: rgba(245,244,240,0.02); border: 1px solid var(--rule); padding: 12px 16px; font-size: 11px; color: rgba(245,244,240,0.5); line-height: 1.6; display: flex; align-items: center; }
+  .note { font-size: 11px; color: rgba(245,244,240,0.32); line-height: 1.8; max-width: 660px; margin-top: 16px; }
+  .doc-footer { border-top: 1px solid var(--rule); padding-top: 36px; margin-top: 60px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: var(--warm-gray); }
+  .footer-tag { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--rule); padding: 6px 14px; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div>
+      <div class="eyebrow">AyuVinc · Master Brand · Wordmark Reference</div>
+      <div class="doc-title">AyuVinc<br><em>Wordmark System</em></div>
+      <div style="margin-top:10px; font-size:11px; color:rgba(245,244,240,0.35); font-style:italic; letter-spacing:0.02em;">Healthcare Infrastructure Intelligence · English only · No symbol</div>
+    </div>
+    <div class="doc-meta">
+      Master brand · Text only<br>
+      Phase 2 approved<br>
+      Version 2 · May 2026
+    </div>
+  </div>
+
+  <!-- PRIMARY DARK -->
+  <div class="section">
+    <div class="section-label">01 — Primary Wordmark · Dark Ground</div>
+    <div class="two-col">
+
+      <!-- Direction A: CamelCase primary -->
+      <div class="stage dark">
+        <div class="stage-label">Direction A · CamelCase · Primary</div>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:12px;">
+          <span class="sg" style="font-size:72px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">AyuVinc</span>
+          <span class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.26em; text-transform:uppercase; color:rgba(245,244,240,0.3);">Healthcare Infrastructure</span>
+        </div>
+      </div>
+
+      <!-- Direction B: Uppercase secondary -->
+      <div class="stage mid">
+        <div class="stage-label">Direction B · Uppercase · Signage / Formal</div>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:10px;">
+          <span class="sg" style="font-size:52px; font-weight:300; letter-spacing:0.18em; text-transform:uppercase; color:var(--off-white); line-height:1;">AYUVINC</span>
+          <span class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.26em; text-transform:uppercase; color:rgba(245,244,240,0.3);">Healthcare Infrastructure</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Wordmark alone, no descriptor -->
+    <div class="two-col">
+      <div class="stage dark" style="min-height:180px; padding:44px 56px;">
+        <div class="stage-label">Wordmark alone</div>
+        <span class="sg" style="font-size:56px; font-weight:300; letter-spacing:0.04em; color:var(--off-white); line-height:1;">AyuVinc</span>
+      </div>
+      <div class="stage mid" style="min-height:180px; padding:44px 56px;">
+        <div class="stage-label">Uppercase · signage register</div>
+        <span class="sg" style="font-size:42px; font-weight:300; letter-spacing:0.18em; text-transform:uppercase; color:var(--off-white); line-height:1;">AYUVINC</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHT / MONOCHROME -->
+  <div class="section">
+    <div class="section-label">02 — Monochrome · Light Ground</div>
+    <div class="two-col">
+
+      <div class="stage light">
+        <div class="stage-label">Direction A · Light</div>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:12px;">
+          <span class="sg" style="font-size:72px; font-weight:300; letter-spacing:0.04em; color:#090d18; line-height:1;">AyuVinc</span>
+          <span class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.26em; text-transform:uppercase; color:rgba(9,13,24,0.3);">Healthcare Infrastructure</span>
+        </div>
+      </div>
+
+      <div class="stage light">
+        <div class="stage-label">Direction B · Light</div>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:10px;">
+          <span class="sg" style="font-size:52px; font-weight:300; letter-spacing:0.18em; text-transform:uppercase; color:#090d18; line-height:1;">AYUVINC</span>
+          <span class="dm" style="font-size:9px; font-weight:400; letter-spacing:0.26em; text-transform:uppercase; color:rgba(9,13,24,0.3);">Healthcare Infrastructure</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SIZE REGISTER -->
+  <div class="section">
+    <div class="section-label">03 — Size Register · Direction A</div>
+    <div class="size-table">
+      <div class="size-row" style="background:rgba(100,175,195,0.03);">
+        <div class="sz-label" style="color:var(--teal);">72px ★</div>
+        <div class="sz-sample"><span class="sg" style="font-size:72px; font-weight:300; letter-spacing:0.04em; color:var(--off-white);">AyuVinc</span></div>
+        <div class="sz-note">Hero / cover · primary display</div>
+      </div>
+      <div class="size-row">
+        <div class="sz-label">48px</div>
+        <div class="sz-sample"><span class="sg" style="font-size:48px; font-weight:300; letter-spacing:0.04em; color:var(--off-white);">AyuVinc</span></div>
+        <div class="sz-note">Page headers · presentations</div>
+      </div>
+      <div class="size-row">
+        <div class="sz-label">32px</div>
+        <div class="sz-sample"><span class="sg" style="font-size:32px; font-weight:300; letter-spacing:0.04em; color:var(--off-white);">AyuVinc</span></div>
+        <div class="sz-note">Navigation · app headers</div>
+      </div>
+      <div class="size-row">
+        <div class="sz-label">22px</div>
+        <div class="sz-sample"><span class="sg" style="font-size:22px; font-weight:400; letter-spacing:0.04em; color:var(--off-white);">AyuVinc</span></div>
+        <div class="sz-note">Sub-headers · weight →400</div>
+      </div>
+      <div class="size-row">
+        <div class="sz-label">14px</div>
+        <div class="sz-sample"><span class="sg" style="font-size:14px; font-weight:400; letter-spacing:0.04em; color:var(--off-white);">AyuVinc</span></div>
+        <div class="sz-note">Compact labels · footer</div>
+      </div>
+    </div>
+    <p class="note">Direction B (AYUVINC) follows the same scale — all uppercase at 0.18em tracking. Used for headers on print documents, signage, formal governance materials. Never in UI navigation.</p>
+  </div>
+
+  <!-- WHAT IT IS NOT -->
+  <div class="section">
+    <div class="section-label">04 — Context & Constraints</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px;">
+
+      <div style="background:rgba(245,244,240,0.02); border:1px solid var(--rule); padding:28px 32px;">
+        <div style="font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal); margin-bottom:16px;">AyuVinc is</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="font-size:12px; color:rgba(245,244,240,0.5); line-height:1.6; padding-left:14px; position:relative;"><span style="position:absolute; left:0; color:var(--sage);">—</span> The master brand. Text only. No symbol.</div>
+          <div style="font-size:12px; color:rgba(245,244,240,0.5); line-height:1.6; padding-left:14px; position:relative;"><span style="position:absolute; left:0; color:var(--sage);">—</span> English only. Never carries Devanagari.</div>
+          <div style="font-size:12px; color:rgba(245,244,240,0.5); line-height:1.6; padding-left:14px; position:relative;"><span style="position:absolute; left:0; color:var(--sage);">—</span> Space Grotesk 300 in all contexts.</div>
+          <div style="font-size:12px; color:rgba(245,244,240,0.5); line-height:1.6; padding-left:14px; position:relative;"><span style="position:absolute; left:0; color:var(--sage);">—</span> The parent of Dhara (01), Vaani (02), Setu (03).</div>
+          <div style="font-size:12px; color:rgba(245,244,240,0.5); line-height:1.6; padding-left:14px; position:relative;"><span style="position:absolute; left:0; color:var(--sage);">—</span> Globally readable. Institutionally credible.</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(245,244,240,0.02); border:1px solid var(--rule); padding:28px 32px;">
+        <div style="font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:oklch(68% 0.10 25); margin-bottom:16px;">AyuVinc is never</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="font-size:12px; color:rgba(245,244,240,0.4); line-height:1.6; padding-left:14px; position:relative;"><span style="position:absolute; left:0; color:rgba(200,120,100,0.5);">—</span> Combined with a symbol or abstract mark.</div>
+          <div style="font-size:12px; color:rgba(245,244,240,0.4); line-height:1.6; padding-left:14px; position:relative;"><span style="position:absolute; left:0; color:rgba(200,120,100,0.5);">—</span> Displayed with Devanagari.</div>
+          <div style="font-size:12px; color:rgba(245,244,240,0.4); line-height:1.6; padding-left:14px; position:relative;"><span style="position:absolute; left:0; color:rgba(200,120,100,0.5);">—</span> Rendered in weights above 400.</div>
+          <div style="font-size:12px; color:rgba(245,244,240,0.4); line-height:1.6; padding-left:14px; position:relative;"><span style="position:absolute; left:0; color:rgba(200,120,100,0.5);">—</span> Used in a colored or gradient fill.</div>
+          <div style="font-size:12px; color:rgba(245,244,240,0.4); line-height:1.6; padding-left:14px; position:relative;"><span style="position:absolute; left:0; color:rgba(200,120,100,0.5);">—</span> Centered on a layout (always left-aligned in lockups).</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SPEC -->
+  <div class="section">
+    <div class="section-label">05 — Specification Reference</div>
+    <div class="spec-list">
+      <div class="spec-row">
+        <div class="sp-lbl">Primary</div>
+        <div class="sp-val">Space Grotesk 300 · CamelCase "AyuVinc" · letter-spacing 0.04em · color #f5f4f0</div>
+      </div>
+      <div class="spec-row">
+        <div class="sp-lbl">Secondary</div>
+        <div class="sp-val">Space Grotesk 300 · Uppercase "AYUVINC" · letter-spacing 0.18em · signage and formal contexts only</div>
+      </div>
+      <div class="spec-row">
+        <div class="sp-lbl">Descriptor</div>
+        <div class="sp-val">DM Sans 400 · 9px · letter-spacing 0.26em · uppercase · #f5f4f0 at 30% · optional</div>
+      </div>
+      <div class="spec-row">
+        <div class="sp-lbl">Light ground</div>
+        <div class="sp-val">#f5f4f0 → #090d18 throughout · no other changes</div>
+      </div>
+      <div class="spec-row">
+        <div class="sp-lbl">Minimum size</div>
+        <div class="sp-val">14px screen · weight shifts to 400 below 24px · 10pt print minimum</div>
+      </div>
+      <div class="spec-row">
+        <div class="sp-lbl">No symbol</div>
+        <div class="sp-val">AyuVinc carries no geometric mark, icon, or abstract symbol in any context. The wordmark is the identity.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>AyuVinc Vision · Master Brand Wordmark · Phase 2 Approved · v2 · May 2026</span>
+    <span class="footer-tag">Master Brand</span>
+  </div>
+
+</div>
+</body>
+</html>

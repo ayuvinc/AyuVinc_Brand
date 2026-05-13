@@ -163,6 +163,90 @@
     </div>
   </div>
 
+  <!-- 03b — TEAL BOLD VARIANT (off-spec, by request) -->
+  <div class="section">
+    <div class="section-label">03b — Teal Bold Variant · Off-spec, by request</div>
+    <div class="instructions" style="margin-bottom:24px;">
+      <h3 style="color:oklch(62% 0.10 195);">Heads-up</h3>
+      <ol>
+        <li>The master brand book reserves teal for layer numbers and structural accents — and forbids weights above 400. This variant deliberately overrides both. Treat it as a one-off, not a system update.</li>
+        <li>Fill colour uses the brand token <code>--ayuvinc-teal</code> (<code>oklch(62% 0.10 195)</code>) on dark, <code>--ayuvinc-teal-dark</code> (<code>oklch(45% 0.10 195)</code>) on light. Wordmark is Space Grotesk 700.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <div class="card-row">
+        <div class="preview-wrap" id="prev-teal-square-dark"></div>
+        <div class="meta-stack">
+          <div>
+            <div class="meta-label">Teal · Bold · Dark</div>
+            <div class="meta-name">ayuvinc-linkedin-profile-teal-dark</div>
+            <div class="meta-dim">400 × 400 · navy ground · teal fill · 700</div>
+          </div>
+          <div class="meta-desc">Teal AyuVinc bold on navy. Use for the LinkedIn profile / company logo.</div>
+          <div class="btn-row">
+            <button class="btn" data-export="ayuvinc-linkedin-profile-teal-dark.svg" data-width="400"><span class="scale">1×</span>Download PNG · 400 × 400</button>
+            <button class="btn" data-export="ayuvinc-linkedin-profile-teal-dark.svg" data-width="800"><span class="scale">2×</span>Download PNG · 800 × 800 (retina)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-row">
+        <div class="preview-wrap light" id="prev-teal-square-light"></div>
+        <div class="meta-stack">
+          <div>
+            <div class="meta-label">Teal · Bold · Light</div>
+            <div class="meta-name">ayuvinc-linkedin-profile-teal-light</div>
+            <div class="meta-dim">400 × 400 · off-white ground · dark teal · 700</div>
+          </div>
+          <div class="meta-desc">Dark teal on off-white. Use for light-themed surfaces.</div>
+          <div class="btn-row">
+            <button class="btn" data-export="ayuvinc-linkedin-profile-teal-light.svg" data-width="400"><span class="scale">1×</span>Download PNG · 400 × 400</button>
+            <button class="btn" data-export="ayuvinc-linkedin-profile-teal-light.svg" data-width="800"><span class="scale">2×</span>Download PNG · 800 × 800 (retina)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-row">
+        <div class="preview-wrap" id="prev-teal-banner-dark"></div>
+        <div class="meta-stack">
+          <div>
+            <div class="meta-label">Teal · Bold · Banner</div>
+            <div class="meta-name">ayuvinc-linkedin-banner-teal-dark</div>
+            <div class="meta-dim">1128 × 191 · cover banner</div>
+          </div>
+          <div class="meta-desc">Teal bold wordmark on navy for the LinkedIn profile cover.</div>
+          <div class="btn-row">
+            <button class="btn" data-export="ayuvinc-linkedin-banner-teal-dark.svg" data-width="1128"><span class="scale">1×</span>Download PNG · 1128 × 191</button>
+            <button class="btn" data-export="ayuvinc-linkedin-banner-teal-dark.svg" data-width="2256"><span class="scale">2×</span>Download PNG · 2256 × 382 (retina)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-row">
+        <div class="preview-wrap" id="prev-teal-wordmark"></div>
+        <div class="meta-stack">
+          <div>
+            <div class="meta-label">Teal · Bold · Master</div>
+            <div class="meta-name">ayuvinc-wordmark-teal</div>
+            <div class="meta-dim">800 × 200 viewBox · transparent</div>
+          </div>
+          <div class="meta-desc">Vector source for the teal bold variant. Transparent ground — composite onto any surface.</div>
+          <div class="btn-row">
+            <button class="btn" data-export="ayuvinc-wordmark-teal.svg" data-width="1600"><span class="scale">2×</span>Download PNG · 1600 × 400 (transparent)</button>
+            <button class="btn" data-export="ayuvinc-wordmark-teal.svg" data-width="3200"><span class="scale">4×</span>Download PNG · 3200 × 800 (transparent)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 04 — WORDMARK MASTER -->
   <div class="section">
     <div class="section-label">04 — Wordmark Master · Transparent</div>
@@ -213,10 +297,14 @@
 <script>
   // Inline-render each SVG into its preview slot, and wire export buttons.
   const slots = [
-    { id: 'prev-square-dark',  file: 'ayuvinc-linkedin-profile-dark.svg'  },
-    { id: 'prev-square-light', file: 'ayuvinc-linkedin-profile-light.svg' },
-    { id: 'prev-banner-dark',  file: 'ayuvinc-linkedin-banner-dark.svg'   },
-    { id: 'prev-wordmark',     file: 'ayuvinc-wordmark.svg'               },
+    { id: 'prev-square-dark',       file: 'ayuvinc-linkedin-profile-dark.svg'       },
+    { id: 'prev-square-light',      file: 'ayuvinc-linkedin-profile-light.svg'      },
+    { id: 'prev-banner-dark',       file: 'ayuvinc-linkedin-banner-dark.svg'        },
+    { id: 'prev-wordmark',          file: 'ayuvinc-wordmark.svg'                    },
+    { id: 'prev-teal-square-dark',  file: 'ayuvinc-linkedin-profile-teal-dark.svg'  },
+    { id: 'prev-teal-square-light', file: 'ayuvinc-linkedin-profile-teal-light.svg' },
+    { id: 'prev-teal-banner-dark',  file: 'ayuvinc-linkedin-banner-teal-dark.svg'   },
+    { id: 'prev-teal-wordmark',     file: 'ayuvinc-wordmark-teal.svg'               },
   ];
 
   // Fetch each SVG and inline it so fonts apply consistently

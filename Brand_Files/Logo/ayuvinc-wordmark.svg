@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AyuVinc · Master Wordmark · Direction A (CamelCase, primary)
+  Transparent ground · scalable vector master
+  Space Grotesk 300 · letter-spacing 0.04em · #f5f4f0
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 800 200"
+     width="800" height="200"
+     role="img" aria-label="AyuVinc">
+  <defs>
+    <style type="text/css"><![CDATA[
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&family=DM+Sans:wght@400&display=swap');
+      .wm   { font-family: 'Space Grotesk', sans-serif; font-weight: 300; font-size: 96px;  letter-spacing: 3.84px;  fill: #f5f4f0; }
+      .desc { font-family: 'DM Sans', sans-serif;       font-weight: 400; font-size: 13px;  letter-spacing: 3.38px;  fill: #f5f4f0; fill-opacity: 0.30; }
+    ]]></style>
+  </defs>
+  <text class="wm"   x="0" y="110">AyuVinc</text>
+  <text class="desc" x="2" y="150">HEALTHCARE INFRASTRUCTURE</text>
+</svg>

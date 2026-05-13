@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AyuVinc · LinkedIn Cover Banner · Dark ground
+  1128 x 191 (LinkedIn personal profile banner)
+  Safe area: keep wordmark left of x≈700 (right edge gets covered by profile photo overlap on some surfaces)
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1128 191"
+     width="1128" height="191"
+     role="img" aria-label="AyuVinc — Healthcare Infrastructure">
+  <defs>
+    <style type="text/css"><![CDATA[
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&family=DM+Sans:wght@400&display=swap');
+      .bg    { fill: #090d18; }
+      .wm    { font-family: 'Space Grotesk', sans-serif; font-weight: 300; font-size: 56px; letter-spacing: 2.24px; fill: #f5f4f0; }
+      .desc  { font-family: 'DM Sans', sans-serif;       font-weight: 400; font-size: 10px; letter-spacing: 2.6px;  fill: #f5f4f0; fill-opacity: 0.30; }
+      .rule  { stroke: #9b9691; stroke-opacity: 0.16; stroke-width: 1; }
+    ]]></style>
+  </defs>
+  <rect class="bg" width="1128" height="191"/>
+  <text class="wm"   x="200" y="100">AyuVinc</text>
+  <text class="desc" x="202" y="128">HEALTHCARE INFRASTRUCTURE INTELLIGENCE</text>
+  <line class="rule" x1="200" y1="141" x2="540" y2="141"/>
+</svg>
